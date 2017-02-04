@@ -73,11 +73,35 @@ public abstract class BaseDBTable {
         }
     }
 
+    protected long insertRecord(ContentValues values) {
+        beginTransaction();
+        try {
+            return db().insert(tableName(), null, values);
+        } finally {
+            endTransaction();
+        }
+    }
+
+    protected boolean updateRecord(ContentValues values) {
+        beginTransaction();
+        try {
+            int updateCount = db().updateWithOnConflict(tableName(), values, NO_WhereClause, NO_SelectionArgs, SQLiteDatabase.CONFLICT_IGNORE);
+            if (updateCount != 1) {
+                long rowId = db().insert(tableName(), null, values);
+                return rowId > 0 ? true : false;
+            } else {
+                return true;
+            }
+        } finally {
+            endTransaction();
+        }
+    }
+
     protected void getRecord(@NonNull String[] keyColumnNames, @NonNull String[] keyFieldValues) {
         beginTransaction();
         Cursor cursor = null;
         try {
-            db().query(tableName(),
+            cursor = db().query(tableName(),
                     getDBColumnsInfo().columnNameList(),
                     new SQLExprBuilder().multipleFieldEquals(keyColumnNames).toString(),
                     keyFieldValues,
@@ -85,6 +109,9 @@ public abstract class BaseDBTable {
                     NO_Having,
                     NO_OrderBy
             );
+            if (cursor != null && cursor.moveToFirst()) {
+
+            }
         } finally {
             if (cursor != null) {
                 cursor.close();
