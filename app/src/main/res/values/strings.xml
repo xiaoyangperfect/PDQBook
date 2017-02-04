@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">PDQBook</string>
+
+    <!-- main page -->
+    <string name="main_page_title">PDQ 最权威的癌症信息库</string>
+    <string name="main_page_title_sub">国家癌症中心 - National Cancer Center</string>
+    <string name="main_page_search_hint_text">癌症专业词典、癌症药典查询</string>
+    <string name="about_pdq">关于PDQ ></string>
+    <string name="prevention">预防</string>
+    <string name="screening">筛查</string>
+    <string name="treatment">治疗</string>
+    <string name="shidaoai">食道癌（专业版）</string>
+    <string name="ruxianai">乳腺癌（专业版）</string>
+    <string name="ganai">肝癌（专业版）</string>
+    <string name="zhichangai">直肠癌（专业版）</string>
+    <string name="feiai">肺癌（专业版）</string>
+    <string name="weiai">胃癌（专业版）</string>
+    <string name="naoai">脑癌（专业版）</string>
+    <string name="risk_inspection">风险测评</string>
+    <string name="done">完成</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_pdq">PDQActivity</string>
+</resources>
