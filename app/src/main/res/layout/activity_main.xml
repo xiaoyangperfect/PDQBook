@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/main_bg"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.wehealth.pdqbook.MainActivity">
+
+    <!--<TextView-->
+        <!--android:id="@+id/mainpage_title"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:text="@string/main_page_title"-->
+        <!--android:textColor="@color/color_navy"-->
+        <!--android:textSize="@dimen/main_page_title_size" />-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/mainpage_sub_title"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/mainpage_title"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginTop="5dp"-->
+        <!--android:text="@string/main_page_title_sub"-->
+        <!--android:textColor="@color/color_navy"-->
+        <!--android:textSize="@dimen/main_page_title_sub_size" />-->
+
+    <!--<RelativeLayout-->
+        <!--android:id="@+id/cancer_btn_lay"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@+id/mainpage_sub_title"-->
+        <!--android:padding="50dp">-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/btn_shidaoai"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:background="@drawable/btn_shidaoai_bg" />-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/btn_ruxianai"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginTop="60dp"-->
+            <!--android:background="@drawable/btn_ruxianai_bg" />-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/btn_ganai"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginTop="140dp"-->
+            <!--android:background="@drawable/btn_ganai_bg" />-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/btn_zhichangai"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_marginTop="210dp"-->
+            <!--android:background="@drawable/btn_zhichangai_bg" />-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/btn_feiai"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="140dp"-->
+            <!--android:background="@drawable/btn_feiai_bg" />-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/btn_weiai"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="60dp"-->
+            <!--android:background="@drawable/btn_weiai_bg" />-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/btn_naoai"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:background="@drawable/btn_naoai_bg" />-->
+
+    <!--</RelativeLayout>-->
+
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/mainpage_search_layout"-->
+        <!--android:layout_below="@+id/cancer_btn_lay"-->
+        <!--android:background="@mipmap/search_bg"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:layout_marginRight="20dp"-->
+        <!--android:padding="10dp">-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/cancer_btn_lay_search_icon"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_marginLeft="20dp"-->
+            <!--android:clickable="false"-->
+            <!--android:src="@mipmap/search" />-->
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_marginLeft="20dp"-->
+            <!--android:layout_toRightOf="@+id/cancer_btn_lay_search_icon"-->
+            <!--android:clickable="false"-->
+            <!--android:text="@string/main_page_search_hint_text"-->
+            <!--android:textColor="@color/color_text_navy"-->
+            <!--android:textSize="16dp" />-->
+    <!--</RelativeLayout>-->
+
+    <!--<RelativeLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/mainpage_about_layout"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/about_pdq_icon"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:clickable="false"-->
+            <!--android:src="@mipmap/xiaotubiao_03" />-->
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_marginLeft="5dp"-->
+            <!--android:layout_toRightOf="@+id/about_pdq_icon"-->
+            <!--android:clickable="false"-->
+            <!--android:text="@string/about_pdq" />-->
+    <!--</RelativeLayout>-->
+</RelativeLayout>
