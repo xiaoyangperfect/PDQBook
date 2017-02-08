@@ -142,6 +142,16 @@ public abstract class BaseDBTable {
         }
     }
 
+    public void getAllRecords(@NonNull IRecordReceiver recordReceiver) {
+        getRecords(getDBColumnsInfo().columnNameListWithRawID(),
+                NO_Selection,
+                NO_SelectionArgs,
+                NO_GroupBy,
+                NO_Having,
+                NO_OrderBy,
+                recordReceiver);
+    }
+
     public void getRecords(@NonNull String[] keyColumnNames, @NonNull String[] keyFieldValues,
                            @NonNull IRecordReceiver recordsReceiver) {
         getRecords(getDBColumnsInfo().columnNameListWithRawID(),
