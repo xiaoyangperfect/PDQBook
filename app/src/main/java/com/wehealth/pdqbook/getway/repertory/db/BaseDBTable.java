@@ -320,4 +320,28 @@ public abstract class BaseDBTable {
             // we eat it to avoid exception spreading. if caller need it, they should catch exceptions in onFieldValue by themselves.
         }
     }
+
+    protected void removeAllRecords() {
+        removeRecords(NO_WhereClause, NO_WhereArgs);
+    }
+
+    protected int removeRecords(String where, String whereArgs) {
+        return removeRecords(new String[]{where}, new String[]{whereArgs});
+    }
+
+    protected int removeRecords(String[] where, String[] whereArgs) {
+        return removeRecords(new SQLExprBuilder().multipleFieldEquals(where).toString(), whereArgs);
+    }
+
+    public int removeRecords(String where, String[] whereArgs) {
+        beginTransaction();
+        try {
+            return db().delete(tableName(), where, whereArgs);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            endTransaction();
+        }
+        return 0;
+    }
 }
