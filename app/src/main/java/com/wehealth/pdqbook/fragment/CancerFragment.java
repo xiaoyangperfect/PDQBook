@@ -3,9 +3,6 @@ package com.wehealth.pdqbook.fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Debug;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -14,18 +11,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.ConsoleMessage;
-import android.webkit.JsPromptResult;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import com.wehealth.pdqbook.BuildConfig;
 import com.wehealth.pdqbook.R;
-import com.wehealth.pdqbook.WebPageActivity;
+import com.wehealth.pdqbook.adapter.FragPagerAdapter;
 import com.wehealth.pdqbook.adapter.ViewPagerAdapter;
 import com.wehealth.pdqbook.getway.HttpConfigure;
-import com.wehealth.pdqbook.tool.PBQWebClient;
 import com.wehealth.pdqbook.view.CircleProgressBar;
 
 import java.util.ArrayList;
@@ -104,47 +96,59 @@ public class CancerFragment extends BaseFragment {
     }
 
     private void initViewPager() {
-        ArrayList<View> views = new ArrayList<>();
+        //add tab
+        _tabLayout.addTab(_tabLayout.newTab().setText(getString(R.string.prevention)));
+        _tabLayout.addTab(_tabLayout.newTab().setText(getString(R.string.screening)));
+        _tabLayout.addTab(_tabLayout.newTab().setText(getString(R.string.treatment)));
+
+        ArrayList<Fragment> fragments = new ArrayList<>();
+        fragments.add(CancerPreventionFragment.newInstance(getPreventionUrl()));
+        fragments.add(CancerScreeningFragment.newInstance(getScreeningUrl()));
+        fragments.add(CancerTreatmentFragment.newInstance(getTreatmentUrl()));
+
         ArrayList<String> titles = new ArrayList<>();
-        View preventionView = LayoutInflater.from(getContext()).inflate(R.layout.item_viewpager_prevention, null);
-        webView1 = (WebView) preventionView.findViewById(R.id.webpager_prevention);
-        CircleProgressBar bar1 = (CircleProgressBar) preventionView.findViewById(R.id.webpage_prevention_progressbar);
-        initWebView(webView1, bar1, getPreventionUrl());
-        views.add(preventionView);
-        String prevention = getString(R.string.prevention);
-        titles.add(prevention);
-        _tabLayout.addTab(_tabLayout.newTab().setText(prevention));
+        titles.add(getString(R.string.prevention));
+        titles.add(getString(R.string.screening));
+        titles.add(getString(R.string.treatment));
 
-        View screeningView = LayoutInflater.from(getContext()).inflate(R.layout.item_viewpager_screening, null);
-        webView2 = (WebView) screeningView.findViewById(R.id.webpager_screening);
-        CircleProgressBar bar2 = (CircleProgressBar) screeningView.findViewById(R.id.webpager_screening_progressbar);
-        initWebView(webView2, bar2, getScreeningUrl());
-        views.add(screeningView);
-        String screening = getString(R.string.screening);
-        titles.add(screening);
-        _tabLayout.addTab(_tabLayout.newTab().setText(screening));
+        FragPagerAdapter pagerAdapter = new FragPagerAdapter(getChildFragmentManager(), fragments, titles);
+        _viewPager.setAdapter(pagerAdapter);
 
-        View treatmentView = LayoutInflater.from(getContext()).inflate(R.layout.item_viewpager_treatment, null);
-        webView3 = (WebView) treatmentView.findViewById(R.id.webpager_treatment);
-        CircleProgressBar bar3 = (CircleProgressBar) treatmentView.findViewById(R.id.webpage_treatment_progressbar);
-        initWebView(webView3, bar3, getTreatmentUrl());
-        views.add(treatmentView);
-        String treatment = getString(R.string.treatment);
-        titles.add(treatment);
-        _tabLayout.addTab(_tabLayout.newTab().setText(treatment));
-
-        ViewPagerAdapter adapter = new ViewPagerAdapter(views, titles);
-        _viewPager.setAdapter(adapter);
         _tabLayout.setupWithViewPager(_viewPager);
-        _tabLayout.setTabsFromPagerAdapter(adapter);
-    }
 
-    private void initWebView(WebView webView, CircleProgressBar bar, String url) {
-        WebSettings settings = webView.getSettings();
-        settings.setJavaScriptEnabled(true);
-        settings.setSupportZoom(true);
-        webView.setWebChromeClient(new PBQWebClient(bar));
-        webView.loadUrl(url);
+//        ArrayList<View> views = new ArrayList<>();
+//        ArrayList<String> titles = new ArrayList<>();
+//        View preventionView = LayoutInflater.from(getContext()).inflate(R.layout.item_viewpager_prevention, null);
+//        webView1 = (WebView) preventionView.findViewById(R.id.webpager_prevention);
+//        CircleProgressBar bar1 = (CircleProgressBar) preventionView.findViewById(R.id.webpage_prevention_progressbar);
+//        initWebView(webView1, bar1, getPreventionUrl());
+//        views.add(preventionView);
+//        String prevention = getString(R.string.prevention);
+//        titles.add(prevention);
+//        _tabLayout.addTab(_tabLayout.newTab().setText(prevention));
+//
+//        View screeningView = LayoutInflater.from(getContext()).inflate(R.layout.item_viewpager_screening, null);
+//        webView2 = (WebView) screeningView.findViewById(R.id.webpager_screening);
+//        CircleProgressBar bar2 = (CircleProgressBar) screeningView.findViewById(R.id.webpager_screening_progressbar);
+//        initWebView(webView2, bar2, getScreeningUrl());
+//        views.add(screeningView);
+//        String screening = getString(R.string.screening);
+//        titles.add(screening);
+//        _tabLayout.addTab(_tabLayout.newTab().setText(screening));
+//
+//        View treatmentView = LayoutInflater.from(getContext()).inflate(R.layout.item_viewpager_treatment, null);
+//        webView3 = (WebView) treatmentView.findViewById(R.id.webpager_treatment);
+//        CircleProgressBar bar3 = (CircleProgressBar) treatmentView.findViewById(R.id.webpage_treatment_progressbar);
+//        initWebView(webView3, bar3, getTreatmentUrl());
+//        views.add(treatmentView);
+//        String treatment = getString(R.string.treatment);
+//        titles.add(treatment);
+//        _tabLayout.addTab(_tabLayout.newTab().setText(treatment));
+//
+//        ViewPagerAdapter adapter = new ViewPagerAdapter(views, titles);
+//        _viewPager.setAdapter(adapter);
+//        _tabLayout.setupWithViewPager(_viewPager);
+//        _tabLayout.setTabsFromPagerAdapter(adapter);
     }
 
     private String getPreventionUrl() {
