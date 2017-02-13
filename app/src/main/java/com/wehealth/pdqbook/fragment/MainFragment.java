@@ -9,11 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.wehealth.pdqbook.PDQActivity;
 import com.wehealth.pdqbook.R;
-import com.wehealth.pdqbook.getway.HttpConfigure;
+import com.wehealth.pdqbook.getway.repertory.CancerDataConfigure;
 import com.wehealth.pdqbook.tool.Strings;
+import com.wehealth.pdqbook.view.CircleLayout;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,27 +61,37 @@ public class MainFragment extends BaseFragment implements View.OnClickListener {
 
     private void initView(View view) {
 
-        ImageView shidaoBtn = (ImageView) view.findViewById(R.id.btn_shidaoai);
-        ImageView ruxianBtn = (ImageView) view.findViewById(R.id.btn_ruxianai);
-        ImageView ganBtn = (ImageView) view.findViewById(R.id.btn_ganai);
-        ImageView zhichangBtn = (ImageView) view.findViewById(R.id.btn_zhichangai);
-        ImageView feiBtn = (ImageView) view.findViewById(R.id.btn_feiai);
-        ImageView weiBtn = (ImageView) view.findViewById(R.id.btn_weiai);
-        ImageView naoBtn = (ImageView) view.findViewById(R.id.btn_naoai);
-
         RelativeLayout searchLayout = (RelativeLayout) view.findViewById(R.id.mainpage_search_layout);
         RelativeLayout aboutLayout = (RelativeLayout) view.findViewById(R.id.mainpage_about_layout);
 
-        shidaoBtn.setOnClickListener(this);
-        ruxianBtn.setOnClickListener(this);
-        ganBtn.setOnClickListener(this);
-        zhichangBtn.setOnClickListener(this);
-        feiBtn.setOnClickListener(this);
-        weiBtn.setOnClickListener(this);
-        naoBtn.setOnClickListener(this);
-        searchLayout.setOnClickListener(this);
-        aboutLayout.setOnClickListener(this);
+        final CancerDataConfigure[] cancers = new CancerDataConfigure[] {
+                CancerDataConfigure.ShiDao,
+                CancerDataConfigure.Gan,
+                CancerDataConfigure.ZhiChang,
+                CancerDataConfigure.Wei,
+                CancerDataConfigure.Fei,
+                CancerDataConfigure.RuXian,
+                CancerDataConfigure.Nao
+        };
 
+        int[] images = new int[cancers.length];
+        for (int i = 0; i < cancers.length; i++) {
+            images[i] = cancers[i].getImageResource();
+        }
+
+        CircleLayout circleLayout = (CircleLayout) view.findViewById(R.id.mainpage_circlelayout);
+        circleLayout.setOnClickListener(new CircleLayout.OnCircleLayoutItemClickListener() {
+            @Override
+            public void edgeItemClick(View view, int position) {
+                onCancerClick(cancers[position]);
+            }
+
+            @Override
+            public void centerItemClick(View view) {
+            }
+        });
+//        circleLayout.setCenterItemImage();
+        circleLayout.setItemImages(images);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -112,41 +124,6 @@ public class MainFragment extends BaseFragment implements View.OnClickListener {
         String urlType = "";
         String title = "";
         switch (v.getId()) {
-            case R.id.btn_shidaoai:
-                url = String.valueOf(1);
-                urlType = Strings.WebPageUrlType.cancerPage.toString();
-                title = getString(R.string.shidaoai);
-                break;
-            case R.id.btn_ruxianai:
-                urlType =  Strings.WebPageUrlType.cancerPage.toString();
-                url = String.valueOf(6);
-                title = getString(R.string.ruxianai);
-                break;
-            case R.id.btn_ganai:
-                urlType = Strings.WebPageUrlType.cancerPage.toString();
-                url = String.valueOf(2);
-                title = getString(R.string.ganai);
-                break;
-            case R.id.btn_zhichangai:
-                urlType = Strings.WebPageUrlType.cancerPage.toString();
-                url = String.valueOf(3);
-                title = getString(R.string.zhichangai);
-                break;
-            case R.id.btn_feiai:
-                urlType = Strings.WebPageUrlType.cancerPage.toString();
-                url = String.valueOf(5);
-                title = getString(R.string.feiai);
-                break;
-            case R.id.btn_weiai:
-                urlType = Strings.WebPageUrlType.cancerPage.toString();
-                url = String.valueOf(4);
-                title = getString(R.string.weiai);
-                break;
-            case R.id.btn_naoai:
-                urlType = Strings.WebPageUrlType.cancerPage.toString();
-                url = String.valueOf(7);
-                title = getString(R.string.naoai);
-                break;
             case R.id.mainpage_search_layout:
 
                 break;
@@ -161,6 +138,18 @@ public class MainFragment extends BaseFragment implements View.OnClickListener {
                 Strings.INTNET_URL_TYPE, urlType,
                 Strings.INTENT_TITLE, title);
 
+        onButtonPressed(Uri.parse(uri));
+    }
+
+    //call when user click cancer button
+    private void onCancerClick(CancerDataConfigure data) {
+        String url = String.valueOf(data.getIndex());
+        String urlType = Strings.WebPageUrlType.cancerPage.toString();
+        String title = getResources().getString(data.getTextResource());
+        String uri = Strings.getIntentUri(MainFragment.class.getSimpleName(),
+                Strings.INTNET_CONTENT_URL, url,
+                Strings.INTNET_URL_TYPE, urlType,
+                Strings.INTENT_TITLE, title);
         onButtonPressed(Uri.parse(uri));
     }
 }

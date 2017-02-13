@@ -5,6 +5,12 @@
     android:background="@mipmap/main_bg"
     tools:context="com.wehealth.pdqbook.fragment.MainFragment">
 
+    <com.wehealth.pdqbook.view.CircleLayout
+        android:id="@+id/mainpage_circlelayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true" />
+
     <TextView
         android:id="@+id/mainpage_title"
         android:layout_width="wrap_content"
@@ -27,74 +33,13 @@
         android:textSize="@dimen/main_page_title_sub_size" />
 
     <RelativeLayout
-        android:id="@+id/cancer_btn_lay"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/mainpage_sub_title"
-        android:padding="50dp">
-
-        <ImageView
-            android:id="@+id/btn_shidaoai"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/btn_shidaoai_bg" />
-
-        <ImageView
-            android:id="@+id/btn_ruxianai"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="60dp"
-            android:background="@drawable/btn_ruxianai_bg" />
-
-        <ImageView
-            android:id="@+id/btn_ganai"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="140dp"
-            android:background="@drawable/btn_ganai_bg" />
-
-        <ImageView
-            android:id="@+id/btn_zhichangai"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="210dp"
-            android:background="@drawable/btn_zhichangai_bg" />
-
-        <ImageView
-            android:id="@+id/btn_feiai"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="140dp"
-            android:background="@drawable/btn_feiai_bg" />
-
-        <ImageView
-            android:id="@+id/btn_weiai"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:background="@drawable/btn_weiai_bg" />
-
-        <ImageView
-            android:id="@+id/btn_naoai"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:background="@drawable/btn_naoai_bg" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/mainpage_search_layout"
-        android:layout_below="@+id/cancer_btn_lay"
-        android:background="@mipmap/search_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mainpage_circlelayout"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:background="@mipmap/search_bg"
         android:padding="10dp">
 
         <ImageView
@@ -119,12 +64,12 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/mainpage_about_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/mainpage_about_layout"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
         android:orientation="horizontal">
 
         <ImageView
