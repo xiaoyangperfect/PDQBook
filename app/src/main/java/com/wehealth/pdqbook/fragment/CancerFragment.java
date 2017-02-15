@@ -40,7 +40,6 @@ public class CancerFragment extends BaseFragment {
 
     private TabLayout _tabLayout;
     private ViewPager _viewPager;
-    private WebView webView1, webView2, webView3;
 
     private OnFragmentInteractionListener mListener;
 
@@ -115,40 +114,6 @@ public class CancerFragment extends BaseFragment {
         _viewPager.setAdapter(pagerAdapter);
 
         _tabLayout.setupWithViewPager(_viewPager);
-
-//        ArrayList<View> views = new ArrayList<>();
-//        ArrayList<String> titles = new ArrayList<>();
-//        View preventionView = LayoutInflater.from(getContext()).inflate(R.layout.item_viewpager_prevention, null);
-//        webView1 = (WebView) preventionView.findViewById(R.id.webpager_prevention);
-//        CircleProgressBar bar1 = (CircleProgressBar) preventionView.findViewById(R.id.webpage_prevention_progressbar);
-//        initWebView(webView1, bar1, getPreventionUrl());
-//        views.add(preventionView);
-//        String prevention = getString(R.string.prevention);
-//        titles.add(prevention);
-//        _tabLayout.addTab(_tabLayout.newTab().setText(prevention));
-//
-//        View screeningView = LayoutInflater.from(getContext()).inflate(R.layout.item_viewpager_screening, null);
-//        webView2 = (WebView) screeningView.findViewById(R.id.webpager_screening);
-//        CircleProgressBar bar2 = (CircleProgressBar) screeningView.findViewById(R.id.webpager_screening_progressbar);
-//        initWebView(webView2, bar2, getScreeningUrl());
-//        views.add(screeningView);
-//        String screening = getString(R.string.screening);
-//        titles.add(screening);
-//        _tabLayout.addTab(_tabLayout.newTab().setText(screening));
-//
-//        View treatmentView = LayoutInflater.from(getContext()).inflate(R.layout.item_viewpager_treatment, null);
-//        webView3 = (WebView) treatmentView.findViewById(R.id.webpager_treatment);
-//        CircleProgressBar bar3 = (CircleProgressBar) treatmentView.findViewById(R.id.webpage_treatment_progressbar);
-//        initWebView(webView3, bar3, getTreatmentUrl());
-//        views.add(treatmentView);
-//        String treatment = getString(R.string.treatment);
-//        titles.add(treatment);
-//        _tabLayout.addTab(_tabLayout.newTab().setText(treatment));
-//
-//        ViewPagerAdapter adapter = new ViewPagerAdapter(views, titles);
-//        _viewPager.setAdapter(adapter);
-//        _tabLayout.setupWithViewPager(_viewPager);
-//        _tabLayout.setTabsFromPagerAdapter(adapter);
     }
 
     private String getPreventionUrl() {
@@ -217,20 +182,5 @@ public class CancerFragment extends BaseFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if (webView1 != null) {
-            webView1.stopLoading();
-            webView1.destroy();
-            webView1 = null;
-        }
-        if (webView2 != null) {
-            webView2.stopLoading();
-            webView2.destroy();
-            webView2 = null;
-        }
-        if (webView3 != null) {
-            webView3.stopLoading();
-            webView3.destroy();
-            webView3 = null;
-        }
     }
 }

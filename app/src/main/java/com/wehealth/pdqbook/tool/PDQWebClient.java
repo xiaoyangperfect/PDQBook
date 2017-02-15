@@ -30,6 +30,8 @@ public class PDQWebClient extends WebChromeClient {
     @Override
     public void onProgressChanged(WebView view, int newProgress) {
         super.onProgressChanged(view, newProgress);
+        if (view == null)
+            return;
         if (newProgress == 100) {
             new Handler().postDelayed(new Runnable() {
                 @Override

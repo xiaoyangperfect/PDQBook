@@ -62,7 +62,9 @@ public class MainFragment extends BaseFragment implements View.OnClickListener {
     private void initView(View view) {
 
         RelativeLayout searchLayout = (RelativeLayout) view.findViewById(R.id.mainpage_search_layout);
+        searchLayout.setOnClickListener(this);
         RelativeLayout aboutLayout = (RelativeLayout) view.findViewById(R.id.mainpage_about_layout);
+        aboutLayout.setOnClickListener(this);
 
         final CancerDataConfigure[] cancers = new CancerDataConfigure[] {
                 CancerDataConfigure.ShiDao,
