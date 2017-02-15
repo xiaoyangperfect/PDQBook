@@ -12,16 +12,16 @@ import static com.wehealth.pdqbook.getway.repertory.db.BaseDBTable.FIELD_RAW_ID;
  */
 
 public class DBColumnsInfo {
-    private ArrayList<Column> mColumns;
+    private ArrayList<IDBColumnInfo> mColumns = new ArrayList<>();
 
-    public ArrayList<Column> getColumns() {
+    public ArrayList<IDBColumnInfo> getColumns() {
         return mColumns;
     }
 
     public String[] columnNameList() {
         String[] nameList = new String[mColumns.size()];
         for (int i = 0; i < mColumns.size(); i++) {
-            nameList[i] = mColumns.get(i).columnName;
+            nameList[i] = mColumns.get(i).columnName();
         }
         return nameList;
     }

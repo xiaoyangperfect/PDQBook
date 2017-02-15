@@ -12,7 +12,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import com.wehealth.pdqbook.R;
-import com.wehealth.pdqbook.tool.PBQWebClient;
+import com.wehealth.pdqbook.tool.PDQWebClient;
 import com.wehealth.pdqbook.view.CircleProgressBar;
 
 /**
@@ -80,7 +80,7 @@ public class RiskInspectionFragment extends BaseFragment {
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setSupportZoom(true);
-        webView.setWebChromeClient(new PBQWebClient(bar));
+        webView.setWebChromeClient(new PDQWebClient(bar));
         webView.loadUrl(url);
     }
 

@@ -14,11 +14,11 @@ import com.wehealth.pdqbook.view.CircleProgressBar;
  * Created by xiaoyang on 2017/1/29.
  */
 
-public class PBQWebClient extends WebChromeClient {
+public class PDQWebClient extends WebChromeClient {
 
     private CircleProgressBar progressBar;
 
-    public PBQWebClient(CircleProgressBar bar) {
+    public PDQWebClient(CircleProgressBar bar) {
         this.progressBar = bar;
     }
 

@@ -1,7 +1,6 @@
 package com.wehealth.pdqbook;
 
 import android.os.Bundle;
-import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -10,15 +9,13 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.webkit.ConsoleMessage;
-import android.webkit.JsPromptResult;
-import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.TextView;
 
 import com.wehealth.pdqbook.adapter.ViewPagerAdapter;
 import com.wehealth.pdqbook.getway.HttpConfigure;
+import com.wehealth.pdqbook.tool.PDQWebClient;
 import com.wehealth.pdqbook.tool.Strings;
 import com.wehealth.pdqbook.view.CircleProgressBar;
 
@@ -140,43 +137,9 @@ public class WebPageActivity extends AppCompatActivity {
         settings.setJavaScriptEnabled(true);
         settings.setSupportZoom(true);
         settings.setCacheMode(WebSettings.LOAD_NO_CACHE);
-        webView.setWebChromeClient(new PBQWebClient(bar));
+        webView.setWebChromeClient(new PDQWebClient(bar));
         webView.loadUrl(url);
 
     }
 
-    class PBQWebClient extends WebChromeClient {
-
-        private CircleProgressBar progressBar;
-
-        public PBQWebClient(CircleProgressBar bar) {
-            this.progressBar = bar;
-        }
-
-        @Override
-        public boolean onConsoleMessage(ConsoleMessage consoleMessage) {
-            return super.onConsoleMessage(consoleMessage);
-        }
-
-        @Override
-        public void onProgressChanged(WebView view, int newProgress) {
-            super.onProgressChanged(view, newProgress);
-            if (newProgress >= 99) {
-                progressBar.setVisibility(View.GONE);
-            } else {
-                progressBar.setProgress(newProgress);
-            }
-        }
-
-        @Override
-        public boolean onCreateWindow(WebView view, boolean isDialog, boolean isUserGesture, Message resultMsg) {
-            progressBar.setVisibility(View.VISIBLE);
-            return super.onCreateWindow(view, isDialog, isUserGesture, resultMsg);
-        }
-
-        @Override
-        public boolean onJsPrompt(WebView view, String url, String message, String defaultValue, JsPromptResult result) {
-            return super.onJsPrompt(view, url, message, defaultValue, result);
-        }
-    }
 }

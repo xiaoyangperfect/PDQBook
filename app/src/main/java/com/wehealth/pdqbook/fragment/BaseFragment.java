@@ -1,7 +1,16 @@
 package com.wehealth.pdqbook.fragment;
 
+import android.annotation.SuppressLint;
 import android.net.Uri;
+import android.os.Build;
 import android.support.v4.app.Fragment;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+
+import com.wehealth.pdqbook.tool.WebJavascriptInterface;
+import com.wehealth.pdqbook.tool.WebSectionJavascriptInterface;
+import com.wehealth.pdqbook.tool.PDQWebClient;
+import com.wehealth.pdqbook.view.CircleProgressBar;
 
 /**
  * Created by xiaoyang on 2017/1/22.
@@ -22,5 +31,18 @@ public class BaseFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    @SuppressLint("JavascriptInterface")
+    protected void initWebView(WebView webView, CircleProgressBar bar, String url, WebJavascriptInterface javascriptInterface) {
+        WebSettings settings = webView.getSettings();
+        settings.setJavaScriptEnabled(true);
+        settings.setSupportZoom(true);
+        webView.addJavascriptInterface(javascriptInterface, "android");
+        webView.setWebChromeClient(new PDQWebClient(bar));
+        if (Build.VERSION.SDK_INT >=Build.VERSION_CODES.KITKAT) {
+            webView.setWebContentsDebuggingEnabled(true);
+        }
+        webView.loadUrl(url);
     }
 }

@@ -4,14 +4,17 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
+import com.wehealth.pdqbook.BuildConfig;
 import com.wehealth.pdqbook.R;
-import com.wehealth.pdqbook.tool.PBQWebClient;
+import com.wehealth.pdqbook.tool.PDQWebClient;
+import com.wehealth.pdqbook.tool.WebListJavascriptInterface;
 import com.wehealth.pdqbook.view.CircleProgressBar;
 
 /**
@@ -23,6 +26,7 @@ import com.wehealth.pdqbook.view.CircleProgressBar;
  * create an instance of this fragment.
  */
 public class CancerPreventionFragment extends BaseFragment {
+    private static final String TAG = CancerPreventionFragment.class.getSimpleName();
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String PARAM_URL = "url";
 
@@ -70,7 +74,14 @@ public class CancerPreventionFragment extends BaseFragment {
             mView = inflater.inflate(R.layout.fragment_cancer_prevention, container, false);
             mWebView = (WebView) mView.findViewById(R.id.webpager_prevention);
             CircleProgressBar bar1 = (CircleProgressBar) mView.findViewById(R.id.webpage_prevention_progressbar);
-            initWebView(mWebView, bar1, mUrl);
+            initWebView(mWebView, bar1, mUrl, new WebListJavascriptInterface() {
+                @Override
+                public void WebDocListDidSelected(String json) {
+                    if (BuildConfig.DEBUG) {
+                        Log.d(TAG, "WebDocListDidSelected: " + json);
+                    }
+                }
+            });
         }
         return mView;
     }
@@ -97,14 +108,6 @@ public class CancerPreventionFragment extends BaseFragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
-
-    private void initWebView(WebView webView, CircleProgressBar bar, String url) {
-        WebSettings settings = webView.getSettings();
-        settings.setJavaScriptEnabled(true);
-        settings.setSupportZoom(true);
-        webView.setWebChromeClient(new PBQWebClient(bar));
-        webView.loadUrl(url);
     }
 
     @Override
