@@ -12,8 +12,7 @@ import com.wehealth.pdqbook.content.AppContext;
  */
 
 public abstract class DatabaseHelper extends SQLiteOpenHelper {
-    private static final int DB_VERSION = 1;
-    private static final String DB_NAME = "PDQ.db";
+
     private DBInfo dbInfo;
 
     public static class DBInfo {

@@ -5,4 +5,5 @@ package com.wehealth.pdqbook.getway.repertory;
  */
 
 public class SharedPrefrence {
+    public static final String USER = "admin";
 }

@@ -41,7 +41,7 @@ public class WebPageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_webpage);
         _url = getIntent().getStringExtra(Strings.INTNET_CONTENT_URL);
         Log.d("web url", _url);
-        _type = getIntent().getStringExtra(Strings.INTNET_URL_TYPE);
+        _type = getIntent().getStringExtra(Strings.INTENT_ACTION_TYPE);
         _titleStr = getIntent().getStringExtra(Strings.INTENT_TITLE);
 
         initToolBar();
@@ -51,7 +51,7 @@ public class WebPageActivity extends AppCompatActivity {
         _viewPager = (ViewPager) findViewById(R.id.webpage_viewpager);
         _searchView = (WebView) findViewById(R.id.webpage_webview);
 
-        if (_type.equals(Strings.WebPageUrlType.cancerPage.toString())) {
+        if (_type.equals(Strings.IntentActionUrlType.cancerPage.toString())) {
             progressBar.setVisibility(View.GONE);
             initViewpager();
         } else {
@@ -77,7 +77,7 @@ public class WebPageActivity extends AppCompatActivity {
         });
 
         TextView doneAction = (TextView) findViewById(R.id.tool_bar_done);
-        if (!_type.equals(Strings.WebPageUrlType.cancerPage.toString())) {
+        if (!_type.equals(Strings.IntentActionUrlType.cancerPage.toString())) {
             doneAction.setVisibility(View.VISIBLE);
         } else {
             doneAction.setVisibility(View.GONE);

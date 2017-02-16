@@ -17,9 +17,13 @@
     <string name="weiai">胃癌（专业版）</string>
     <string name="naoai">脑癌（专业版）</string>
     <string name="risk_inspection">风险测评</string>
+    <string name="search">查询</string>
     <string name="done">完成</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_pdq">PDQActivity</string>
+
+    <!-- search page -->
+    <string name="search_hint">请输入查询内容</string>
 </resources>

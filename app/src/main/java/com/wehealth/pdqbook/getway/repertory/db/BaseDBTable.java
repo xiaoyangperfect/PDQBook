@@ -66,7 +66,7 @@ public abstract class BaseDBTable {
     }
 
     public void dropTable(SQLiteDatabase db) {
-        PDQDBHelper.dropTable(db, tableName());
+        DBHelper.dropTable(db, tableName());
     }
 
     protected long replaceRecord(ContentValues values) {
