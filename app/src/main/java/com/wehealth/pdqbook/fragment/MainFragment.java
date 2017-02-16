@@ -7,9 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.wehealth.pdqbook.PDQActivity;
 import com.wehealth.pdqbook.R;
@@ -127,17 +125,17 @@ public class MainFragment extends BaseFragment implements View.OnClickListener {
         String title = "";
         switch (v.getId()) {
             case R.id.mainpage_search_layout:
-
+                urlType = Strings.IntentActionUrlType.search.toString();
+                title = getString(R.string.search);
                 break;
             case R.id.mainpage_about_layout:
-                url = "";
-                urlType = Strings.WebPageUrlType.riskInspection.toString();
+                urlType = Strings.IntentActionUrlType.riskInspection.toString();
                 title = getString(R.string.risk_inspection);
                 break;
         }
         String uri = Strings.getIntentUri(MainFragment.class.getSimpleName(),
                 Strings.INTNET_CONTENT_URL, url,
-                Strings.INTNET_URL_TYPE, urlType,
+                Strings.INTENT_ACTION_TYPE, urlType,
                 Strings.INTENT_TITLE, title);
 
         onButtonPressed(Uri.parse(uri));
@@ -146,11 +144,11 @@ public class MainFragment extends BaseFragment implements View.OnClickListener {
     //call when user click cancer button
     private void onCancerClick(CancerDataConfigure data) {
         String url = String.valueOf(data.getIndex());
-        String urlType = Strings.WebPageUrlType.cancerPage.toString();
+        String urlType = Strings.IntentActionUrlType.cancerPage.toString();
         String title = getResources().getString(data.getTextResource());
         String uri = Strings.getIntentUri(MainFragment.class.getSimpleName(),
                 Strings.INTNET_CONTENT_URL, url,
-                Strings.INTNET_URL_TYPE, urlType,
+                Strings.INTENT_ACTION_TYPE, urlType,
                 Strings.INTENT_TITLE, title);
         onButtonPressed(Uri.parse(uri));
     }

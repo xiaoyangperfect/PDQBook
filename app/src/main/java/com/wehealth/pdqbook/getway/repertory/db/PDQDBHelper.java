@@ -2,26 +2,27 @@ package com.wehealth.pdqbook.getway.repertory.db;
 
 import android.database.sqlite.SQLiteDatabase;
 
+import com.wehealth.pdqbook.getway.repertory.db.table.SearchRecordTable;
+
 /**
- * Created by xiaoyang on 2017/2/1.
+ * @Author yangxiao on 2/16/2017.
  */
 
-public class PDQDBHelper extends DatabaseHelper {
+public class PDQDBHelper extends DBHelper {
     public PDQDBHelper(DBInfo dbInfo) {
         super(dbInfo);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
+        for (BaseDBTable table : tableList(db)) {
+            table.createTableIfNecessary();
+        }
     }
 
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
-    }
-
-    public static void dropTable(SQLiteDatabase db, String tableName) {
-        db.execSQL("DROP TABLE IF EXISTS " + tableName);
+    private BaseDBTable[] tableList(SQLiteDatabase db) {
+        return new BaseDBTable[]{
+                new SearchRecordTable(db)
+        };
     }
 }
