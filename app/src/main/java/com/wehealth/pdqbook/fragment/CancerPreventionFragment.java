@@ -3,6 +3,8 @@ package com.wehealth.pdqbook.fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.MainThread;
+import android.support.annotation.UiThread;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +18,7 @@ import com.wehealth.pdqbook.BuildConfig;
 import com.wehealth.pdqbook.R;
 import com.wehealth.pdqbook.getway.model.ArticleIntent;
 import com.wehealth.pdqbook.tool.PDQWebClient;
+import com.wehealth.pdqbook.tool.Strings;
 import com.wehealth.pdqbook.tool.WebListJavascriptInterface;
 import com.wehealth.pdqbook.view.CircleProgressBar;
 
@@ -85,7 +88,16 @@ public class CancerPreventionFragment extends BaseFragment {
                         ArticleIntent art = new ArticleIntent().parser(json);
                         if (art == null)
                             return;
-
+                        final String uri = Strings.getIntentUri(MainFragment.class.getSimpleName(),
+                                Strings.INTNET_CONTENT_URL, art.getUrl(),
+                                Strings.INTENT_ACTION_TYPE, Strings.IntentActionUrlType.cancerArticleQuestion.toString(),
+                                Strings.INTENT_TITLE, art.getTitle());
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                onButtonPressed(Uri.parse(uri));
+                            }
+                        });
                     }
                 }
             });
@@ -120,8 +132,10 @@ public class CancerPreventionFragment extends BaseFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mWebView.stopLoading();
-        mWebView.destroy();
-        mWebView = null;
+        if (mWebView != null) {
+            mWebView.stopLoading();
+            mWebView.destroy();
+            mWebView = null;
+        }
     }
 }

@@ -6,16 +6,24 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.wehealth.pdqbook.PDQActivity;
 import com.wehealth.pdqbook.R;
+import com.wehealth.pdqbook.adapter.SearchRecordsAdapter;
+import com.wehealth.pdqbook.getway.datamodel.SearchRecord;
 import com.wehealth.pdqbook.getway.repertory.SharedPrefrence;
 import com.wehealth.pdqbook.getway.repertory.db.PDQDB;
 import com.wehealth.pdqbook.getway.repertory.db.table.SearchRecordTable;
+import com.wehealth.pdqbook.view.RecyclerItemClickListener;
+
+import java.util.ArrayList;
 
 import static android.content.Context.SEARCH_SERVICE;
 
@@ -57,6 +65,8 @@ public class SearchFragment extends BaseFragment {
     private void initView(View view) {
         SearchView searchView = (SearchView) view.findViewById(R.id.search_input);
         setupSearchView(searchView);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.search_record_list);
+        setUpRecordsView(recyclerView);
     }
 
     private void setupSearchView(final SearchView mSearchView) {
@@ -92,6 +102,19 @@ public class SearchFragment extends BaseFragment {
 //        if (!TextUtils.isEmpty(mQuery)) {
 //            mSearchView.setQuery(mQuery, false);
 //        }
+    }
+
+    private void setUpRecordsView(RecyclerView recordsView) {
+        ArrayList<SearchRecord> searchRecords = ((PDQActivity) getActivity()).getSearchRecord();
+        recordsView.setLayoutManager(new LinearLayoutManager(getContext()));
+        SearchRecordsAdapter adapter = new SearchRecordsAdapter(searchRecords);
+        recordsView.setAdapter(adapter);
+        adapter.setClickListener(new RecyclerItemClickListener() {
+            @Override
+            public void onClick(int position) {
+
+            }
+        });
     }
 
     private void insertSearchTextToDB(String search) {

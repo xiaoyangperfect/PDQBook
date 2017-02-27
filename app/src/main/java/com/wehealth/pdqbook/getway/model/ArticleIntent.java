@@ -31,7 +31,7 @@ public class ArticleIntent {
         try {
             ArticleIntent art = new ArticleIntent();
             JSONObject object = new JSONObject(json);
-            art.setUrl(object.getString("link"));
+            art.setUrl(object.getString("link").replaceAll("#", "!!!"));
             art.setTitle(object.getString("title"));
             return art;
         } catch (JSONException e) {

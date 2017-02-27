@@ -18,7 +18,8 @@ public class Strings {
     public enum IntentActionUrlType {
         cancerPage,
         riskInspection,
-        search
+        search,
+        cancerArticleQuestion
     }
 
     //fragment onclick listener param uri

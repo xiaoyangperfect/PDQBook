@@ -9,12 +9,19 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.wehealth.pdqbook.fragment.BaseFragment;
+import com.wehealth.pdqbook.fragment.CancerArticleQuestionFragment;
 import com.wehealth.pdqbook.fragment.CancerFragment;
 import com.wehealth.pdqbook.fragment.MainFragment;
 import com.wehealth.pdqbook.fragment.RiskInspectionFragment;
 import com.wehealth.pdqbook.fragment.SearchFragment;
 import com.wehealth.pdqbook.getway.HttpConfigure;
+import com.wehealth.pdqbook.getway.datamodel.SearchRecord;
+import com.wehealth.pdqbook.getway.repertory.db.IRecordReceiver;
+import com.wehealth.pdqbook.getway.repertory.db.PDQDB;
+import com.wehealth.pdqbook.getway.repertory.db.table.SearchRecordTable;
 import com.wehealth.pdqbook.tool.Strings;
+
+import java.util.ArrayList;
 
 public class PDQActivity extends AppCompatActivity implements BaseFragment.OnFragmentInteractionListener {
 
@@ -81,11 +88,19 @@ public class PDQActivity extends AppCompatActivity implements BaseFragment.OnFra
             changeFragment(RiskInspectionFragment.newInstance(HttpConfigure.getUrlRiskInspection()), title);
         } else if (type.equalsIgnoreCase(Strings.IntentActionUrlType.search.toString())) {
             changeFragment(SearchFragment.newInstance(), title);
+        } else if (type.equalsIgnoreCase(Strings.IntentActionUrlType.cancerArticleQuestion.toString())) {
+            String url = urlIndex.replaceAll("!!!", "#");
+            changeFragment(CancerArticleQuestionFragment.newInstance(url), title);
         }
 
     }
 
     public void hideToolbar() {
         _toolbar.setVisibility(View.GONE);
+    }
+
+    //get search records
+    public ArrayList<SearchRecord> getSearchRecord() {
+        return SearchRecord.get();
     }
 }

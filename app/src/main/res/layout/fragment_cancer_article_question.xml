@@ -1,0 +1,23 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.wehealth.pdqbook.fragment.CancerArticleQuestionFragment">
+
+    <WebView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/article_question_wv"/>
+
+    <com.wehealth.pdqbook.view.CircleProgressBar
+        app:mlpb_enable_circle_background="true"
+        app:mlpb_progress_stoke_width="5dp"
+        app:mlpb_progress_text_visibility="visible"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        app:mlpb_progress_text_size="18dp"
+        android:id="@+id/article_question_wv_progressbar"
+        android:layout_centerInParent="true" />
+
+</RelativeLayout>
