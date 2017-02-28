@@ -14,9 +14,9 @@
         app:mlpb_enable_circle_background="true"
         app:mlpb_progress_stoke_width="5dp"
         app:mlpb_progress_text_visibility="visible"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        app:mlpb_progress_text_size="18dp"
+        android:layout_width="@dimen/circle_progress_bar_diameter"
+        android:layout_height="@dimen/circle_progress_bar_diameter"
+        app:mlpb_progress_text_size="@dimen/circle_progress_bar_text_size"
         android:id="@+id/webpage_prevention_progressbar"
         android:layout_centerInParent="true"/>
 </RelativeLayout>

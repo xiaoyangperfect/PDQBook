@@ -10,4 +10,5 @@
     <color name="color_blue">#65C4FA</color>
     <color name="color_lightgray">#f9f9f9</color>
     <color name="color_lightblue">#DEF3FA</color>
+    <color name="color_light_gray_item_divider">#ddd</color>
 </resources>
