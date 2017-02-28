@@ -3,12 +3,14 @@ package com.wehealth.pdqbook.fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wehealth.pdqbook.BuildConfig;
@@ -26,6 +28,9 @@ public class CancerArticleQuestionFragment extends BaseFragment {
 
     private String mUrl;
     private String mTitle;
+
+    private boolean isMenuShowing = false;
+
     private WebView _webView;
 
     private OnFragmentInteractionListener mListener;
@@ -87,10 +92,33 @@ public class CancerArticleQuestionFragment extends BaseFragment {
         ((PDQActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         TextView title = (TextView) view.findViewById(R.id.tool_bar_title);
         title.setText(mTitle);
+        ImageView img = (ImageView) view.findViewById(R.id.toolbar_popwindow);
+        img.setVisibility(View.VISIBLE);
+        FloatingActionButton languageBtn = (FloatingActionButton) view.findViewById(R.id.article_question_change_language);
+
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ((PDQActivity) getActivity()).clickBack();
+            }
+        });
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isMenuShowing) {
+                    isMenuShowing = false;
+                    _webView.loadUrl("javascript:PagePopover.showSelfMeau()");
+                } else {
+                    isMenuShowing = true;
+                    _webView.loadUrl("javascript:PagePopover.HideSelfMeau()");
+                }
+            }
+        });
+
+        languageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                _webView.loadUrl("javascript:slideLanguage()");
             }
         });
     }
@@ -122,6 +150,10 @@ public class CancerArticleQuestionFragment extends BaseFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-
+        if (_webView != null) {
+            _webView.stopLoading();
+            _webView.destroy();
+            _webView = null;
+        }
     }
 }

@@ -9,13 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.JavascriptInterface;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import com.wehealth.pdqbook.BuildConfig;
 import com.wehealth.pdqbook.R;
 import com.wehealth.pdqbook.getway.model.ArticleIntent;
-import com.wehealth.pdqbook.tool.PDQWebClient;
 import com.wehealth.pdqbook.tool.Strings;
 import com.wehealth.pdqbook.tool.WebListJavascriptInterface;
 import com.wehealth.pdqbook.view.CircleProgressBar;
@@ -35,8 +33,8 @@ public class CancerScreeningFragment extends BaseFragment {
 
     private String mUrl;
 
-    private WebView mWebView;
-    private View mView;
+    private WebView _webView;
+    private View _view;
 
     private OnFragmentInteractionListener mListener;
 
@@ -72,11 +70,11 @@ public class CancerScreeningFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        if (mView == null) {
-            mView = inflater.inflate(R.layout.fragment_cancer_screening, container, false);
-            mWebView = (WebView) mView.findViewById(R.id.webpager_screening);
-            CircleProgressBar bar1 = (CircleProgressBar) mView.findViewById(R.id.webpager_screening_progressbar);
-            initWebView(mWebView, bar1, mUrl, new WebListJavascriptInterface() {
+        if (_view == null) {
+            _view = inflater.inflate(R.layout.fragment_cancer_screening, container, false);
+            _webView = (WebView) _view.findViewById(R.id.webpager_screening);
+            CircleProgressBar bar1 = (CircleProgressBar) _view.findViewById(R.id.webpager_screening_progressbar);
+            initWebView(_webView, bar1, mUrl, new WebListJavascriptInterface() {
                 @JavascriptInterface
                 @Override
                 public void WebDocListDidSelected(String json) {
@@ -99,7 +97,7 @@ public class CancerScreeningFragment extends BaseFragment {
                 }
             });
         }
-        return mView;
+        return _view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -129,8 +127,10 @@ public class CancerScreeningFragment extends BaseFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mWebView.stopLoading();
-        mWebView.destroy();
-        mWebView = null;
+        if (_webView != null) {
+            _webView.stopLoading();
+            _webView.destroy();
+            _webView = null;
+        }
     }
 }
