@@ -7,13 +7,15 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
+import android.widget.TextView;
 
 import com.wehealth.pdqbook.BuildConfig;
+import com.wehealth.pdqbook.PDQActivity;
 import com.wehealth.pdqbook.R;
 import com.wehealth.pdqbook.adapter.FragPagerAdapter;
 import com.wehealth.pdqbook.adapter.ViewPagerAdapter;
@@ -23,18 +25,15 @@ import com.wehealth.pdqbook.view.CircleProgressBar;
 import java.util.ArrayList;
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link CancerFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link CancerFragment#newInstance} factory method to
- * create an instance of this fragment.
+ *
  */
 public class CancerFragment extends BaseFragment {
     private static final String TAG = CancerFragment.class.getSimpleName();
     private static final String WEB_URL_INDEX = "url_index";
+    private static final String TITLE = "title";
 
     private String mUrlIndex;
+    private String mTitle;
 
     private String mPreventionUrl, mScreeningUrl, mTreatmentUrl;
 
@@ -51,14 +50,16 @@ public class CancerFragment extends BaseFragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param title Parameter 1.
+     * @param urlIndex url index.
+     * @param title page title
      * @return A new instance of fragment CancerFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static CancerFragment newInstance(String title) {
+    public static CancerFragment newInstance(String urlIndex, String title) {
         CancerFragment fragment = new CancerFragment();
         Bundle args = new Bundle();
-        args.putString(WEB_URL_INDEX, title);
+        args.putString(WEB_URL_INDEX, urlIndex);
+        args.putString(TITLE, title);
         fragment.setArguments(args);
         return fragment;
     }
@@ -68,6 +69,7 @@ public class CancerFragment extends BaseFragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mUrlIndex = getArguments().getString(WEB_URL_INDEX);
+            mTitle = getArguments().getString(TITLE);
         }
     }
 
@@ -76,6 +78,7 @@ public class CancerFragment extends BaseFragment {
         super.onActivityCreated(savedInstanceState);
         if (savedInstanceState != null) {
             mUrlIndex = savedInstanceState.getString(WEB_URL_INDEX);
+            mTitle = savedInstanceState.getString(TITLE);
         }
     }
 
@@ -89,9 +92,26 @@ public class CancerFragment extends BaseFragment {
     }
 
     private void initView(View view) {
+        initTitle(view, mTitle);
+
         _tabLayout = (TabLayout) view.findViewById(R.id.webpage_tab);
         _viewPager = (ViewPager) view.findViewById(R.id.webpage_viewpager);
         initViewPager();
+    }
+
+    private void initTitle(View view, String mTitle) {
+        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        ((PDQActivity) getActivity()).setSupportActionBar(toolbar);
+        ((PDQActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
+        ((PDQActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        TextView title = (TextView) view.findViewById(R.id.tool_bar_title);
+        title.setText(mTitle);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((PDQActivity) getActivity()).clickBack();
+            }
+        });
     }
 
     private void initViewPager() {

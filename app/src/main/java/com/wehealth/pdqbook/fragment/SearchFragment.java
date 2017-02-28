@@ -5,14 +5,17 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.wehealth.pdqbook.PDQActivity;
 import com.wehealth.pdqbook.R;
@@ -33,6 +36,8 @@ import static android.content.Context.SEARCH_SERVICE;
 public class SearchFragment extends BaseFragment {
 
     private OnFragmentInteractionListener mListener;
+    private static final String TITLE = "title";
+    private String mTitle;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -43,14 +48,28 @@ public class SearchFragment extends BaseFragment {
      * this fragment using the provided parameters.
      * @return A new instance of fragment SearchFragment.
      */
-    public static SearchFragment newInstance() {
+    public static SearchFragment newInstance(String title) {
         SearchFragment fragment = new SearchFragment();
+        Bundle args = new Bundle();
+        args.putString(TITLE, title);
+        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mTitle = getArguments().getString(TITLE);
+        }
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState != null) {
+            mTitle = savedInstanceState.getString(TITLE);
+        }
     }
 
     @Override
@@ -63,10 +82,26 @@ public class SearchFragment extends BaseFragment {
     }
 
     private void initView(View view) {
+        initTitle(view, mTitle);
         SearchView searchView = (SearchView) view.findViewById(R.id.search_input);
         setupSearchView(searchView);
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.search_record_list);
         setUpRecordsView(recyclerView);
+    }
+
+    private void initTitle(View view, String mTitle) {
+        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        ((PDQActivity) getActivity()).setSupportActionBar(toolbar);
+        ((PDQActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
+        ((PDQActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        TextView title = (TextView) view.findViewById(R.id.tool_bar_title);
+        title.setText(mTitle);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((PDQActivity) getActivity()).clickBack();
+            }
+        });
     }
 
     private void setupSearchView(final SearchView mSearchView) {
@@ -126,6 +161,12 @@ public class SearchFragment extends BaseFragment {
         values.put(SearchRecordTable.SEARCH_RECORD_NUMBER, 1);
         values.put(SearchRecordTable.SEARCH_RECORD_STATUS, SearchRecordTable.SearchStatus.success.toString());
         table.setSearchRecord(values);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(TITLE, mTitle);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

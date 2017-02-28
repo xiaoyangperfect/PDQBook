@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
-import com.wehealth.pdqbook.PDQActivity;
 import com.wehealth.pdqbook.R;
 import com.wehealth.pdqbook.getway.repertory.CancerDataConfigure;
 import com.wehealth.pdqbook.tool.Strings;
@@ -53,7 +52,6 @@ public class MainFragment extends BaseFragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_main, container, false);
         initView(view);
-        ((PDQActivity) getActivity()).hideToolbar();
         return view;
     }
 

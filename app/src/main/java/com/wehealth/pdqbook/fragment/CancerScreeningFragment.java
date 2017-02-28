@@ -8,12 +8,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import com.wehealth.pdqbook.BuildConfig;
 import com.wehealth.pdqbook.R;
+import com.wehealth.pdqbook.getway.model.ArticleIntent;
 import com.wehealth.pdqbook.tool.PDQWebClient;
+import com.wehealth.pdqbook.tool.Strings;
 import com.wehealth.pdqbook.tool.WebListJavascriptInterface;
 import com.wehealth.pdqbook.view.CircleProgressBar;
 
@@ -74,11 +77,25 @@ public class CancerScreeningFragment extends BaseFragment {
             mWebView = (WebView) mView.findViewById(R.id.webpager_screening);
             CircleProgressBar bar1 = (CircleProgressBar) mView.findViewById(R.id.webpager_screening_progressbar);
             initWebView(mWebView, bar1, mUrl, new WebListJavascriptInterface() {
+                @JavascriptInterface
                 @Override
                 public void WebDocListDidSelected(String json) {
                     if (BuildConfig.DEBUG) {
                         Log.d(TAG, "WebDocListDidSelected: " + json);
                     }
+                    ArticleIntent art = new ArticleIntent().parser(json);
+                    if (art == null)
+                        return;
+                    final String uri = Strings.getIntentUri(MainFragment.class.getSimpleName(),
+                            Strings.INTNET_CONTENT_URL, art.getUrl(),
+                            Strings.INTENT_ACTION_TYPE, Strings.IntentActionUrlType.cancerArticleQuestion.toString(),
+                            Strings.INTENT_TITLE, art.getTitle());
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            onButtonPressed(Uri.parse(uri));
+                        }
+                    });
                 }
             });
         }
