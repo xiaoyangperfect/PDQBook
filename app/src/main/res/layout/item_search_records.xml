@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical" >
 
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -11,9 +12,10 @@
         android:layout_marginBottom="@dimen/item_top_padding"
         android:layout_marginLeft="@dimen/item_left_padding"
         android:layout_marginRight="@dimen/item_left_padding"
-        android:id="@+id/item_search_records_content"
-        android:textColor="@color/color_text_navy"
-        android:textSize="@dimen/main_page_title_size"/>
+        android:drawableLeft="@mipmap/search_record"
+        android:drawablePadding="@dimen/item_top_padding"
+        android:gravity="center_vertical"
+        android:id="@+id/item_search_records_content" />
 
     <View
         android:layout_width="match_parent"

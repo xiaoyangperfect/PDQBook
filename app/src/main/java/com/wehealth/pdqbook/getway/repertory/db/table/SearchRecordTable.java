@@ -46,7 +46,13 @@ public class SearchRecordTable extends BaseDBTable {
     }
 
     public void getSearchRecords(@NonNull IRecordReceiver recordReceiver) {
-        getAllRecords(recordReceiver);
+        getRecords(getDBColumnsInfo().columnNameListWithRawID(),
+                NO_Selection,
+                NO_SelectionArgs,
+                NO_GroupBy,
+                NO_Having,
+                SEARCH_RECORD_NUMBER + " DESC",
+                recordReceiver);
     }
 
     public void setSearchRecord(ContentValues cv) {
@@ -55,10 +61,12 @@ public class SearchRecordTable extends BaseDBTable {
                 new String[]{SEARCH_RECORD_NUMBER},
                 SEARCH_RECORD_CONTENT + " = ? and " + SEARCH_RECORD_USER + " = ?",
                 new String[]{cv.getAsString(SEARCH_RECORD_CONTENT), cv.getAsString(SEARCH_RECORD_USER)},
-                null, null, null);
+                null, null, SEARCH_RECORD_NUMBER + " DESC");
         if (cursor == null || cursor.getCount() == 0) {
+            cursor.close();
             db().insert(tableName(), null, cv);
         } else {
+            cursor.moveToFirst();
             ContentValues contentValues = cv;
             contentValues.put(SEARCH_RECORD_NUMBER, (cursor.getInt(cursor.getColumnIndex(SEARCH_RECORD_NUMBER)) + 1));
             db().updateWithOnConflict(tableName(),

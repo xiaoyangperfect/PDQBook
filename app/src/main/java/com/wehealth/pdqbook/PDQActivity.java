@@ -11,6 +11,7 @@ import com.wehealth.pdqbook.fragment.CancerFragment;
 import com.wehealth.pdqbook.fragment.MainFragment;
 import com.wehealth.pdqbook.fragment.RiskInspectionFragment;
 import com.wehealth.pdqbook.fragment.SearchFragment;
+import com.wehealth.pdqbook.fragment.SearchResultFragment;
 import com.wehealth.pdqbook.getway.HttpConfigure;
 import com.wehealth.pdqbook.getway.datamodel.SearchRecord;
 import com.wehealth.pdqbook.tool.Strings;
@@ -49,6 +50,9 @@ public class PDQActivity extends AppCompatActivity implements BaseFragment.OnFra
         String fragment = uri.getFragment();
         if (fragment.equalsIgnoreCase(MainFragment.class.getSimpleName())) {
             onActionMainFragment(uri);
+        } else if (fragment.equalsIgnoreCase(SearchFragment.class.getSimpleName())) {
+            String searchContent = uri.getQueryParameter(Strings.INTENT_CONTENT);
+            changeFragment(SearchResultFragment.newInstance(getString(R.string.search_result), searchContent));
         }
     }
 

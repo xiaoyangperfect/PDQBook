@@ -15,6 +15,8 @@ public class HttpConfigure {
     private static final String URL_ARTICLE_WEB = "http://pt.wehealth.mobi/ncc/index.html#/page2/%s";
     //文章详情页面
     private static final String URL_ARTICLE_DETAIL_WEB = "http://pt.wehealth.mobi/ncc/index.html#/page2/%s/%s";
+    //搜索接口
+    private static final String URL_SEARCH = "http://ps.wehealth.mobi/API//NCC/Search?keyword=%s";
 
     //cancerWebSection = @{@"0":@"Prevention", @"1":@"Screening", @"2":@"Treatment"};
 //    tabBarNames = @[@"预防", @"筛查", @"治疗"];
@@ -36,5 +38,9 @@ public class HttpConfigure {
 
     public static String getUrlArticleDetailWeb(String cdrId, String paraId) {
         return String.format(URL_ARTICLE_DETAIL_WEB, cdrId, paraId);
+    }
+
+    public static String getSearchUrl(String content) {
+        return String.format(URL_SEARCH, content);
     }
 }

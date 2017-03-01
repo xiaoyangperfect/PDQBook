@@ -11,6 +11,7 @@ public class Strings {
 
     public static final String INTNET_CONTENT_URL = "url";
     public static final String INTENT_TITLE = "title";
+    public static final String INTENT_CONTENT = "content";
 
     //intent type
     public static final String INTENT_ACTION_TYPE = "type";

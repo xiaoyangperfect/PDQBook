@@ -12,9 +12,11 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 import com.wehealth.pdqbook.PDQActivity;
@@ -24,6 +26,7 @@ import com.wehealth.pdqbook.getway.datamodel.SearchRecord;
 import com.wehealth.pdqbook.getway.repertory.SharedPrefrence;
 import com.wehealth.pdqbook.getway.repertory.db.PDQDB;
 import com.wehealth.pdqbook.getway.repertory.db.table.SearchRecordTable;
+import com.wehealth.pdqbook.tool.Strings;
 import com.wehealth.pdqbook.view.RecyclerItemClickListener;
 
 import java.util.ArrayList;
@@ -38,6 +41,9 @@ public class SearchFragment extends BaseFragment {
     private OnFragmentInteractionListener mListener;
     private static final String TITLE = "title";
     private String mTitle;
+
+    ArrayList<SearchRecord> mSearchRecords;
+    SearchRecordsAdapter mAdapter;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -75,6 +81,7 @@ public class SearchFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.e("onCreateView", "11");
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search, container, false);
         initView(view);
@@ -85,8 +92,8 @@ public class SearchFragment extends BaseFragment {
         initTitle(view, mTitle);
         SearchView searchView = (SearchView) view.findViewById(R.id.search_input);
         setupSearchView(searchView);
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.search_record_list);
-        setUpRecordsView(recyclerView);
+        setUpRecordsView(view);
+        initRecordView();
     }
 
     private void initTitle(View view, String mTitle) {
@@ -116,40 +123,57 @@ public class SearchFragment extends BaseFragment {
             public boolean onQueryTextSubmit(String s) {
                 if (s.length() < 1)
                     return true;
-                mSearchView.clearFocus();
-                insertSearchTextToDB(s);
+                doSearch(s);
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String s) {
-//                searchFor(s);
                 return true;
             }
         });
         mSearchView.setOnCloseListener(new SearchView.OnCloseListener() {
             @Override
             public boolean onClose() {
-//                dismiss(null);
                 return false;
             }
         });
-//        if (!TextUtils.isEmpty(mQuery)) {
-//            mSearchView.setQuery(mQuery, false);
-//        }
+
     }
 
-    private void setUpRecordsView(RecyclerView recordsView) {
-        ArrayList<SearchRecord> searchRecords = ((PDQActivity) getActivity()).getSearchRecord();
-        recordsView.setLayoutManager(new LinearLayoutManager(getContext()));
-        SearchRecordsAdapter adapter = new SearchRecordsAdapter(searchRecords);
-        recordsView.setAdapter(adapter);
-        adapter.setClickListener(new RecyclerItemClickListener() {
+    private void doSearch(String content) {
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+        insertSearchTextToDB(content);
+        final String uri = Strings.getIntentUri(SearchFragment.class.getSimpleName(),
+                Strings.INTENT_CONTENT, content);
+        getActivity().runOnUiThread(new Runnable() {
             @Override
-            public void onClick(int position) {
-
+            public void run() {
+                onButtonPressed(Uri.parse(uri));
             }
         });
+    }
+
+    private void setUpRecordsView(View view) {
+        RecyclerView recordsView = (RecyclerView) view.findViewById(R.id.search_record_list);
+        mSearchRecords = new ArrayList<>();
+        recordsView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mAdapter = new SearchRecordsAdapter(mSearchRecords);
+        recordsView.setAdapter(mAdapter);
+        mAdapter.setClickListener(new RecyclerItemClickListener() {
+            @Override
+            public void onClick(int position) {
+                String content = mSearchRecords.get(position).getContent();
+                doSearch(content);
+            }
+        });
+    }
+
+    private void initRecordView() {
+        mSearchRecords = ((PDQActivity) getActivity()).getSearchRecord();
+        mAdapter.setRecords(mSearchRecords);
+        mAdapter.notifyDataSetChanged();
     }
 
     private void insertSearchTextToDB(String search) {

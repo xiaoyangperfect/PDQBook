@@ -24,6 +24,10 @@ public class SearchRecordsAdapter extends RecyclerView.Adapter<SearchRecordsAdap
         this.mRecords = records;
     }
 
+    public void setRecords(ArrayList<SearchRecord> records) {
+        this.mRecords = records;
+    }
+
     public void setClickListener(RecyclerItemClickListener listener) {
         this.mClickListener = listener;
     }
