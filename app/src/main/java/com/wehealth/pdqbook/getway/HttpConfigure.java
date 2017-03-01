@@ -7,7 +7,7 @@ package com.wehealth.pdqbook.getway;
 public class HttpConfigure {
     private static final String URL_HOST = "http://ps.wehealth.mobi/API/NCC";
     //风险检测
-    private static final String URL_RISK_INSPECTION = "http://www.wehealth.mobi/H5/index_q.html";
+    private static final String URL_RISK_INSPECTION = "http://pt.wehealth.mobi/ncc/index.html#/page5/lung_show";
     //癌症页面
     //http://pt.wehealth.mobi/ncc/index.html#/summarylist/1/Prevention
     private static final String URL_CANCER_WEB = "http://pt.wehealth.mobi/ncc/index.html#/summarylist/%s/%s";

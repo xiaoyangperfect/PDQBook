@@ -1,39 +1,41 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.wehealth.pdqbook.fragment.CancerArticleQuestionFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="com.wehealth.pdqbook.fragment.CancerArticleQuestionFragment">
 
-    <include layout="@layout/title_layout"/>
+    <include layout="@layout/title_layout" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <WebView
+            android:id="@+id/article_question_wv"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/article_question_wv"/>
+            android:layout_height="match_parent" />
 
         <com.wehealth.pdqbook.view.CircleProgressBar
-            app:mlpb_enable_circle_background="true"
-            app:mlpb_progress_stoke_width="5dp"
-            app:mlpb_progress_text_visibility="visible"
+            android:id="@+id/article_question_wv_progressbar"
             android:layout_width="@dimen/circle_progress_bar_diameter"
             android:layout_height="@dimen/circle_progress_bar_diameter"
+            android:layout_centerInParent="true"
+            app:mlpb_enable_circle_background="true"
+            app:mlpb_progress_stoke_width="5dp"
             app:mlpb_progress_text_size="@dimen/circle_progress_bar_text_size"
-            android:id="@+id/article_question_wv_progressbar"
-            android:layout_centerInParent="true" />
+            app:mlpb_progress_text_visibility="visible" />
 
-        <android.support.design.widget.FloatingActionButton
+        <ImageView
+            android:id="@+id/article_question_change_language"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/article_question_change_language"
+            android:scaleType="centerCrop"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/fab_margin"
-            android:layout_marginBottom="@dimen/fab_margin"/>
+            android:layout_marginBottom="@dimen/fab_margin"
+            android:layout_marginRight="@dimen/fab_margin" />
     </RelativeLayout>
 
 </LinearLayout>

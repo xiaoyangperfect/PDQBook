@@ -26,6 +26,9 @@ public class CancerArticleQuestionFragment extends BaseFragment {
     private static final String URL = "url";
     private static final String TITLE = "title";
 
+    private static final String LANGUAGE_EN = "en";
+    private static final String LANGUAGE_CN = "cn";
+
     private String mUrl;
     private String mTitle;
 
@@ -94,7 +97,9 @@ public class CancerArticleQuestionFragment extends BaseFragment {
         title.setText(mTitle);
         ImageView img = (ImageView) view.findViewById(R.id.toolbar_popwindow);
         img.setVisibility(View.VISIBLE);
-        FloatingActionButton languageBtn = (FloatingActionButton) view.findViewById(R.id.article_question_change_language);
+        final ImageView languageBtn = (ImageView) view.findViewById(R.id.article_question_change_language);
+        languageBtn.setImageResource(R.mipmap.change_language_to_en);
+        languageBtn.setTag(LANGUAGE_CN);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,6 +123,13 @@ public class CancerArticleQuestionFragment extends BaseFragment {
         languageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (((String)languageBtn.getTag()).equalsIgnoreCase(LANGUAGE_CN)) {
+                    languageBtn.setTag(LANGUAGE_EN);
+                    languageBtn.setImageResource(R.mipmap.change_language_to_cn);
+                } else {
+                    languageBtn.setTag(LANGUAGE_CN);
+                    languageBtn.setImageResource(R.mipmap.change_language_to_en);
+                }
                 _webView.loadUrl("javascript:slideLanguage()");
             }
         });
