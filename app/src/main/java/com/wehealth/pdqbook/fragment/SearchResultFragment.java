@@ -12,6 +12,15 @@ import android.widget.TextView;
 
 import com.wehealth.pdqbook.PDQActivity;
 import com.wehealth.pdqbook.R;
+import com.wehealth.pdqbook.getway.HttpConfigure;
+import com.wehealth.pdqbook.getway.PDQInterface;
+import com.wehealth.pdqbook.view.CircleProgressBar;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,7 +40,11 @@ public class SearchResultFragment extends BaseFragment {
     private String mTitle;
     private String mParam;
 
+    private CircleProgressBar _circleProgressBar;
+
     private OnFragmentInteractionListener mListener;
+
+    private Call mCall;
 
     public SearchResultFragment() {
         // Required empty public constructor
@@ -70,8 +83,23 @@ public class SearchResultFragment extends BaseFragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search_result, container, false);
         initTitle(view);
-
+        initData();
         return view;
+    }
+
+    private void initData() {
+        mCall = PDQInterface.request(HttpConfigure.getSearchUrl(mParam),
+                new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+
+                    }
+                });
     }
 
     private void initTitle(View view) {
@@ -87,6 +115,9 @@ public class SearchResultFragment extends BaseFragment {
                 ((PDQActivity) getActivity()).clickBack();
             }
         });
+
+        _circleProgressBar = (CircleProgressBar) view.findViewById(R.id.search_result_progressbar);
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -111,5 +142,13 @@ public class SearchResultFragment extends BaseFragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        if (mCall != null) {
+            mCall.cancel();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 }
