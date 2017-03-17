@@ -4,19 +4,26 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.gson.stream.JsonReader;
 import com.wehealth.pdqbook.PDQActivity;
 import com.wehealth.pdqbook.R;
 import com.wehealth.pdqbook.getway.HttpConfigure;
 import com.wehealth.pdqbook.getway.PDQInterface;
+import com.wehealth.pdqbook.getway.model.SearchResult;
+import com.wehealth.pdqbook.tool.GsonTool;
 import com.wehealth.pdqbook.view.CircleProgressBar;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -97,7 +104,15 @@ public class SearchResultFragment extends BaseFragment {
 
                     @Override
                     public void onResponse(Call call, Response response) throws IOException {
+                        InputStream in = response.body().byteStream();
+                        JsonReader reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
+                        SearchResult result = GsonTool.parserJson(reader, SearchResult.class);
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
 
+                            }
+                        });
                     }
                 });
     }
@@ -115,9 +130,12 @@ public class SearchResultFragment extends BaseFragment {
                 ((PDQActivity) getActivity()).clickBack();
             }
         });
+    }
 
+    private void initView(View view) {
         _circleProgressBar = (CircleProgressBar) view.findViewById(R.id.search_result_progressbar);
-
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.search_result_list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     // TODO: Rename method, update argument and hook method into UI event
