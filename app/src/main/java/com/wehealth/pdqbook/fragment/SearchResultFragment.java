@@ -11,23 +11,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.gson.stream.JsonReader;
 import com.wehealth.pdqbook.PDQActivity;
 import com.wehealth.pdqbook.R;
 import com.wehealth.pdqbook.getway.HttpConfigure;
-import com.wehealth.pdqbook.getway.PDQInterface;
+import com.wehealth.pdqbook.getway.error.PDQException;
 import com.wehealth.pdqbook.getway.model.SearchResult;
-import com.wehealth.pdqbook.tool.GsonTool;
 import com.wehealth.pdqbook.view.CircleProgressBar;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -90,31 +87,13 @@ public class SearchResultFragment extends BaseFragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_search_result, container, false);
         initTitle(view);
+        initView(view);
         initData();
         return view;
     }
 
     private void initData() {
-        mCall = PDQInterface.request(HttpConfigure.getSearchUrl(mParam),
-                new Callback() {
-                    @Override
-                    public void onFailure(Call call, IOException e) {
-
-                    }
-
-                    @Override
-                    public void onResponse(Call call, Response response) throws IOException {
-                        InputStream in = response.body().byteStream();
-                        JsonReader reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
-                        SearchResult result = GsonTool.parserJson(reader, SearchResult.class);
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-
-                            }
-                        });
-                    }
-                });
+        SearchResult.load(mCall, HttpConfigure.getSearchUrl(mParam));
     }
 
     private void initTitle(View view) {
@@ -136,6 +115,16 @@ public class SearchResultFragment extends BaseFragment {
         _circleProgressBar = (CircleProgressBar) view.findViewById(R.id.search_result_progressbar);
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.search_result_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+    }
+
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
+    public void onEvent(SearchResult result) {
+
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onError(PDQException e) {
+        Toast.makeText(getContext(), ((Exception) e.getException()).getMessage(), Toast.LENGTH_SHORT).show();
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -163,6 +152,18 @@ public class SearchResultFragment extends BaseFragment {
         if (mCall != null) {
             mCall.cancel();
         }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
     }
 
     @Override

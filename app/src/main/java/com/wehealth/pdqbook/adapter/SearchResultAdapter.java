@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapter.ViewHolder> {
 
-    Sear
+
 
 
     @Override
