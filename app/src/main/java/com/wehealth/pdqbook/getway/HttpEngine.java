@@ -37,7 +37,9 @@ public class HttpEngine {
         Request request = new Request.Builder()
                 .url(url)
                 .build();
-        return mOkHttpClient.newCall(request);
+        Call call = mOkHttpClient.newCall(request);
+        call.enqueue(callback);
+        return call;
     }
 
     public Call postAsyncHttp() {

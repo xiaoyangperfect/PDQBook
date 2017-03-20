@@ -16,4 +16,11 @@
     <dimen name="fab_margin">16dp</dimen>
 
     <!-- web pager -->
+
+    <!--  search result list  -->
+    <dimen name="item_search_result_classic">16dp</dimen>
+    <dimen name="item_search_result_title">14dp</dimen>
+    <dimen name="item_search_result_content">14dp</dimen>
+    <dimen name="item_search_result_outside_padding">3dp</dimen>
+    <dimen name="item_search_result_inside_padding">5dp</dimen>
 </resources>

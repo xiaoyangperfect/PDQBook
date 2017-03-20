@@ -13,6 +13,7 @@ import org.greenrobot.eventbus.EventBus;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -39,6 +40,24 @@ public class SearchResult {
                 InputStream in = response.body().byteStream();
                 JsonReader reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
                 SearchResult result = GsonTool.parserJson(reader, SearchResult.class);
+                ArrayList<SearchResultListEntry> results = result.getData().getList();
+                ArrayList<SearchResultListEntry> list = new ArrayList<SearchResultListEntry>();
+                if (results != null) {
+                    for (SearchResultListEntry entry:results) {
+                        if (entry.getCategoryName().equalsIgnoreCase("PDQ")) {
+                            SearchResultListEntry newEntry = entry;
+                            for (SearchResultInfoEntry infoEntry : entry.getList()) {
+                                ArrayList<SearchResultInfoEntry> infoEntries = new ArrayList<SearchResultInfoEntry>();
+                                infoEntries.add(infoEntry);
+                                newEntry.setList(infoEntries);
+                                list.add(newEntry);
+                            }
+                        } else {
+                            list.add(entry);
+                        }
+                    }
+                }
+                result.getData().setList(list);
                 EventBus.getDefault().postSticky(result);
             }
         });

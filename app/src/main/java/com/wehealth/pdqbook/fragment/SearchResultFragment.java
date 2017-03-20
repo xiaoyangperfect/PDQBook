@@ -15,14 +15,18 @@ import android.widget.Toast;
 
 import com.wehealth.pdqbook.PDQActivity;
 import com.wehealth.pdqbook.R;
+import com.wehealth.pdqbook.adapter.SearchResultAdapter;
 import com.wehealth.pdqbook.getway.HttpConfigure;
 import com.wehealth.pdqbook.getway.error.PDQException;
 import com.wehealth.pdqbook.getway.model.SearchResult;
+import com.wehealth.pdqbook.getway.model.SearchResultListEntry;
 import com.wehealth.pdqbook.view.CircleProgressBar;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.ArrayList;
 
 import okhttp3.Call;
 
@@ -43,6 +47,8 @@ public class SearchResultFragment extends BaseFragment {
     // TODO: Rename and change types of parameters
     private String mTitle;
     private String mParam;
+    private ArrayList<SearchResultListEntry> mList;
+    private SearchResultAdapter mAdapter;
 
     private CircleProgressBar _circleProgressBar;
 
@@ -115,11 +121,21 @@ public class SearchResultFragment extends BaseFragment {
         _circleProgressBar = (CircleProgressBar) view.findViewById(R.id.search_result_progressbar);
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.search_result_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mList = new ArrayList<>();
+        mAdapter = new SearchResultAdapter(mList);
+        recyclerView.setAdapter(mAdapter);
+
     }
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     public void onEvent(SearchResult result) {
-
+        _circleProgressBar.setVisibility(View.GONE);
+        if (result == null) {
+            return;
+        }
+        ArrayList<SearchResultListEntry> results = result.getData().getList();
+        mAdapter.setList(results);
+        mAdapter.notifyDataSetChanged();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
