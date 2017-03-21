@@ -20,6 +20,7 @@ import com.wehealth.pdqbook.getway.HttpConfigure;
 import com.wehealth.pdqbook.getway.error.PDQException;
 import com.wehealth.pdqbook.getway.model.SearchResult;
 import com.wehealth.pdqbook.getway.model.SearchResultListEntry;
+import com.wehealth.pdqbook.listener.OnItemClickListener;
 import com.wehealth.pdqbook.view.CircleProgressBar;
 
 import org.greenrobot.eventbus.EventBus;
@@ -125,6 +126,12 @@ public class SearchResultFragment extends BaseFragment {
         mAdapter = new SearchResultAdapter(mList);
         recyclerView.setAdapter(mAdapter);
 
+        mAdapter.setItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onClick(int position) {
+
+            }
+        });
     }
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
@@ -133,8 +140,8 @@ public class SearchResultFragment extends BaseFragment {
         if (result == null) {
             return;
         }
-        ArrayList<SearchResultListEntry> results = result.getData().getList();
-        mAdapter.setList(results);
+        mList = result.getData().getList();
+        mAdapter.setList(mList);
         mAdapter.notifyDataSetChanged();
     }
 

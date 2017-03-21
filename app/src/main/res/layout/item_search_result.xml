@@ -1,56 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="@dimen/item_search_result_inside_padding">
 
-    <LinearLayout
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/item_search_result_outside_padding"
-        android:orientation="vertical"
-        android:padding="@dimen/item_search_result_inside_padding">
-
-        <TextView
-            android:id="@+id/item_search_result_classic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="PDQ"
-            android:textColor="@color/color_navy"
-            android:textSize="@dimen/item_search_result_classic" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="@dimen/item_search_result_inside_padding"
-            android:background="@color/color_light_gray_item_divider" />
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/item_search_result_title_lay"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:padding="@dimen/item_search_result_inside_padding">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="■"
-                android:textColor="@color/color_blue" />
-
-            <TextView
-                android:id="@+id/item_search_result_title"
+                android:id="@+id/item_search_result_classic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/item_top_padding"
-                android:textColor="@color/color_blue"
-                android:textSize="@dimen/item_search_result_title" />
-        </LinearLayout>
+                android:text="PDQ"
+                android:textColor="@color/color_navy"
+                android:textSize="@dimen/item_search_result_classic" />
 
-        <TextView
-            android:id="@+id/item_search_result_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/item_left_padding"
-            android:textColor="@color/color_blue"
-            android:textSize="@dimen/item_search_result_content" />
-    </LinearLayout>
-</android.support.v7.widget.CardView>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/item_search_result_inside_padding"
+                android:background="@color/color_light_gray_item_divider" />
+
+            <LinearLayout
+                android:id="@+id/item_search_result_title_lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="■"
+                    android:layout_marginLeft="@dimen/item_top_padding"
+                    android:textColor="@color/color_blue" />
+
+                <TextView
+                    android:id="@+id/item_search_result_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/item_top_padding"
+                    android:textColor="@color/color_blue"
+                    android:textSize="@dimen/item_search_result_title" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/item_search_result_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxHeight="50dp"
+                android:ellipsize="end"
+                android:layout_margin="@dimen/item_top_padding"
+                android:textColor="@color/color_blue"
+                android:textSize="@dimen/item_search_result_content" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</RelativeLayout>
