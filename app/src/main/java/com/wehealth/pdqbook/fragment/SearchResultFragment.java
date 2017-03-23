@@ -1,26 +1,33 @@
 package com.wehealth.pdqbook.fragment;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wehealth.pdqbook.PDQActivity;
 import com.wehealth.pdqbook.R;
 import com.wehealth.pdqbook.adapter.SearchResultAdapter;
+import com.wehealth.pdqbook.adapter.SearchResultPopWindowListAdapter;
 import com.wehealth.pdqbook.getway.HttpConfigure;
 import com.wehealth.pdqbook.getway.error.PDQException;
 import com.wehealth.pdqbook.getway.model.SearchResult;
+import com.wehealth.pdqbook.getway.model.SearchResultInfoEntry;
 import com.wehealth.pdqbook.getway.model.SearchResultListEntry;
 import com.wehealth.pdqbook.listener.OnItemClickListener;
+import com.wehealth.pdqbook.listener.OnItemClickListenerWithViewCallBack;
 import com.wehealth.pdqbook.view.CircleProgressBar;
 
 import org.greenrobot.eventbus.EventBus;
@@ -126,12 +133,31 @@ public class SearchResultFragment extends BaseFragment {
         mAdapter = new SearchResultAdapter(mList);
         recyclerView.setAdapter(mAdapter);
 
-        mAdapter.setItemClickListener(new OnItemClickListener() {
+        mAdapter.setItemClickListener(new OnItemClickListenerWithViewCallBack() {
             @Override
-            public void onClick(int position) {
+            public void onClick(int position, View v) {
+                SearchResultListEntry entry = mList.get(position);
+                if (entry.getCategoryName().equalsIgnoreCase("PDQ")) {
 
+                } else {
+                    showPopUpWindow(entry.getList(), v);
+                }
             }
         });
+    }
+
+    private void showPopUpWindow(ArrayList<SearchResultInfoEntry> list, View v) {
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.popwidown_search_result, null);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.popwindow_list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        SearchResultPopWindowListAdapter adapter = new SearchResultPopWindowListAdapter(list);
+        recyclerView.setAdapter(adapter);
+        PopupWindow window = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT);
+        window.setFocusable(true);
+        window.setAnimationStyle(R.style.popwindow_anim);
+//        window.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#F8F8F8")));
+        window.showAtLocation(v, Gravity.CENTER, 0, 0);
     }
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)

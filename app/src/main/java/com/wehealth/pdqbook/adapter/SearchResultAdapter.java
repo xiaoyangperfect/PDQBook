@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.wehealth.pdqbook.R;
 import com.wehealth.pdqbook.getway.model.SearchResultListEntry;
 import com.wehealth.pdqbook.listener.OnItemClickListener;
+import com.wehealth.pdqbook.listener.OnItemClickListenerWithViewCallBack;
 
 import java.util.ArrayList;
 
@@ -20,13 +21,13 @@ import java.util.ArrayList;
 public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapter.ViewHolder> {
 
     private ArrayList<SearchResultListEntry> mList;
-    private OnItemClickListener mClickListener;
+    private OnItemClickListenerWithViewCallBack mClickListener;
 
     public SearchResultAdapter(ArrayList<SearchResultListEntry> list) {
         this.mList = list;
     }
 
-    public void setItemClickListener(OnItemClickListener listener) {
+    public void setItemClickListener(OnItemClickListenerWithViewCallBack listener) {
         this.mClickListener = listener;
     }
 
@@ -80,7 +81,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
 
         @Override
         public void onClick(View v) {
-            mClickListener.onClick(getAdapterPosition());
+            mClickListener.onClick(getAdapterPosition(), v);
         }
     }
 }

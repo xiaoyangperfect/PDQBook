@@ -20,22 +20,31 @@
             app:popupTheme="@style/AppTheme.PopupOverlay"
             app:navigationIcon="@mipmap/back_bg">
 
-            <TextView
-                android:id="@+id/tool_bar_title"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/title_size" />
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/tool_bar_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:ellipsize="middle"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/title_size" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:id="@+id/toolbar_popwindow"
-                android:background="@mipmap/search"
-                android:visibility="gone"
-                android:layout_gravity="right"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:id="@+id/toolbar_popwindow"
+                    android:background="@mipmap/search"
+                    android:visibility="gone"
+                    android:layout_gravity="right|center_vertical"/>
+            </LinearLayout>
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>

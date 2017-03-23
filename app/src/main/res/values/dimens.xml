@@ -23,4 +23,7 @@
     <dimen name="item_search_result_content">14dp</dimen>
     <dimen name="item_search_result_outside_padding">3dp</dimen>
     <dimen name="item_search_result_inside_padding">5dp</dimen>
+
+    <!-- popupwindow -->
+    <dimen name="popwindow_margin_window">40dp</dimen>
 </resources>
