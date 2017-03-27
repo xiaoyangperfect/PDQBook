@@ -85,20 +85,20 @@ public class CancerPreventionFragment extends BaseFragment {
                 public void WebDocListDidSelected(String json) {
                     if (BuildConfig.DEBUG) {
                         Log.d(TAG, "WebDocListDidSelected: " + json);
-                        ArticleIntent art = new ArticleIntent().parser(json);
-                        if (art == null)
-                            return;
-                        final String uri = Strings.getIntentUri(MainFragment.class.getSimpleName(),
-                                Strings.INTNET_CONTENT_URL, art.getUrl(),
-                                Strings.INTENT_ACTION_TYPE, Strings.IntentActionUrlType.cancerArticleQuestion.toString(),
-                                Strings.INTENT_TITLE, art.getTitle());
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                onButtonPressed(Uri.parse(uri));
-                            }
-                        });
                     }
+                    ArticleIntent art = new ArticleIntent().parser(json);
+                    if (art == null)
+                        return;
+                    final String uri = Strings.getIntentUri(MainFragment.class.getSimpleName(),
+                            Strings.INTNET_CONTENT_URL, art.getUrl(),
+                            Strings.INTENT_ACTION_TYPE, Strings.IntentActionUrlType.cancerArticleQuestion.toString(),
+                            Strings.INTENT_TITLE, art.getTitle());
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            onButtonPressed(Uri.parse(uri));
+                        }
+                    });
                 }
             });
         }

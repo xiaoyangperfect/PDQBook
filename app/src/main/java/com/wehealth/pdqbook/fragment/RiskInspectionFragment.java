@@ -6,16 +6,20 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.TextView;
 
+import com.wehealth.pdqbook.BuildConfig;
 import com.wehealth.pdqbook.PDQActivity;
 import com.wehealth.pdqbook.R;
 import com.wehealth.pdqbook.tool.PDQWebClient;
+import com.wehealth.pdqbook.tool.WebRiskInspectionJSInterface;
 import com.wehealth.pdqbook.view.CircleProgressBar;
 
 /**
@@ -27,6 +31,7 @@ import com.wehealth.pdqbook.view.CircleProgressBar;
  * create an instance of this fragment.
  */
 public class RiskInspectionFragment extends BaseFragment {
+    private static final String TAG = RiskInspectionFragment.class.getSimpleName();
     private static final String WEB_URL = "url";
     private static final String TITLE = "title";
 
@@ -81,7 +86,15 @@ public class RiskInspectionFragment extends BaseFragment {
         initTitle(view, mTitle);
         WebView webView = (WebView) view.findViewById(R.id.risk_webview);
         CircleProgressBar bar = (CircleProgressBar) view.findViewById(R.id.risk_progressbar);
-        initWebView(webView, bar, mUrl);
+        initWebView(webView, bar, mUrl, new WebRiskInspectionJSInterface() {
+            @JavascriptInterface
+            @Override
+            public void WebGetResult(String json) {
+                if (BuildConfig.DEBUG) {
+                    Log.e(TAG, json);
+                }
+            }
+        });
         return view;
     }
 
