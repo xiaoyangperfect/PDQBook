@@ -28,6 +28,7 @@ import com.wehealth.pdqbook.getway.model.SearchResultInfoEntry;
 import com.wehealth.pdqbook.getway.model.SearchResultListEntry;
 import com.wehealth.pdqbook.listener.OnItemClickListener;
 import com.wehealth.pdqbook.listener.OnItemClickListenerWithViewCallBack;
+import com.wehealth.pdqbook.tool.Strings;
 import com.wehealth.pdqbook.view.CircleProgressBar;
 
 import org.greenrobot.eventbus.EventBus;
@@ -138,7 +139,19 @@ public class SearchResultFragment extends BaseFragment {
             public void onClick(int position, View v) {
                 SearchResultListEntry entry = mList.get(position);
                 if (entry.getCategoryName().equalsIgnoreCase("PDQ")) {
-
+                    String url = HttpConfigure.getUrlArticleDetailWeb(entry.getList().get(0).getSid(),
+                            entry.getList().get(0).getDescList().get(0).getParaId()) + "/cn";
+                    url = url.replaceAll("#", "!!!");
+                    final String uri = Strings.getIntentUri(SearchResultFragment.class.getSimpleName(),
+                            Strings.INTNET_CONTENT_URL, url,
+                            Strings.INTENT_ACTION_TYPE, Strings.IntentActionUrlType.cancerArticleQuestion.toString(),
+                            Strings.INTENT_TITLE, entry.getList().get(0).getTitle());
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            onButtonPressed(Uri.parse(uri));
+                        }
+                    });
                 } else {
                     showPopUpWindow(entry.getList(), v);
                 }
@@ -156,7 +169,6 @@ public class SearchResultFragment extends BaseFragment {
                 ViewGroup.LayoutParams.MATCH_PARENT);
         window.setFocusable(true);
         window.setAnimationStyle(R.style.popwindow_anim);
-//        window.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#F8F8F8")));
         window.showAtLocation(v, Gravity.CENTER, 0, 0);
     }
 

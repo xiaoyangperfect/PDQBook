@@ -53,6 +53,10 @@ public class PDQActivity extends AppCompatActivity implements BaseFragment.OnFra
         } else if (fragment.equalsIgnoreCase(SearchFragment.class.getSimpleName())) {
             String searchContent = uri.getQueryParameter(Strings.INTENT_CONTENT);
             changeFragment(SearchResultFragment.newInstance(getString(R.string.search_result), searchContent));
+        } else if (fragment.equalsIgnoreCase(SearchResultFragment.class.getSimpleName())) {
+            String url = uri.getQueryParameter(Strings.INTNET_CONTENT_URL).replaceAll("!!!", "#");
+            String title = uri.getQueryParameter(Strings.INTENT_TITLE);
+            changeFragment(CancerArticleQuestionFragment.newInstance(url, title));
         }
     }
 

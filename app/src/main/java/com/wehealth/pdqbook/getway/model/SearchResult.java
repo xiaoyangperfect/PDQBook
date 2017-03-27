@@ -45,8 +45,9 @@ public class SearchResult {
                 if (results != null) {
                     for (SearchResultListEntry entry:results) {
                         if (entry.getCategoryName().equalsIgnoreCase("PDQ")) {
-                            SearchResultListEntry newEntry = entry;
                             for (SearchResultInfoEntry infoEntry : entry.getList()) {
+                                SearchResultListEntry newEntry = new SearchResultListEntry();
+                                newEntry.setCategoryName("PDQ");
                                 ArrayList<SearchResultInfoEntry> infoEntries = new ArrayList<SearchResultInfoEntry>();
                                 infoEntries.add(infoEntry);
                                 newEntry.setList(infoEntries);
