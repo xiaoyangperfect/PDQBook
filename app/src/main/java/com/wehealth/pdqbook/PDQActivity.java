@@ -39,7 +39,7 @@ public class PDQActivity extends AppCompatActivity implements BaseFragment.OnFra
 
     private void changeFragment(Fragment fragment) {
         getSupportFragmentManager().beginTransaction()
-                .setCustomAnimations(R.anim.slide_right_in, R.anim.slide_left_out)
+                .setCustomAnimations(R.anim.slide_right_in, R.anim.slide_left_out, R.anim.slide_left_in, R.anim.slide_right_out)
                 .replace(R.id.fragment_container, fragment)
                 .addToBackStack(fragment.getClass().getSimpleName())
                 .commit();
