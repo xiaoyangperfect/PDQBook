@@ -18,7 +18,9 @@ import android.widget.TextView;
 import com.wehealth.pdqbook.BuildConfig;
 import com.wehealth.pdqbook.PDQActivity;
 import com.wehealth.pdqbook.R;
+import com.wehealth.pdqbook.getway.model.RiskResult;
 import com.wehealth.pdqbook.tool.PDQWebClient;
+import com.wehealth.pdqbook.tool.Strings;
 import com.wehealth.pdqbook.tool.WebRiskInspectionJSInterface;
 import com.wehealth.pdqbook.view.CircleProgressBar;
 
@@ -93,6 +95,15 @@ public class RiskInspectionFragment extends BaseFragment {
                 if (BuildConfig.DEBUG) {
                     Log.e(TAG, json);
                 }
+                RiskResult riskResult = RiskResult.parser(json);
+                final String uri = Strings.getIntentUri(RiskInspectionFragment.class.getSimpleName(),
+                        Strings.INTENT_CONTENT, String.valueOf(riskResult.getData().getF2()));
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        onButtonPressed(Uri.parse(uri));
+                    }
+                });
             }
         });
         return view;

@@ -10,6 +10,7 @@ import com.wehealth.pdqbook.fragment.CancerArticleQuestionFragment;
 import com.wehealth.pdqbook.fragment.CancerFragment;
 import com.wehealth.pdqbook.fragment.MainFragment;
 import com.wehealth.pdqbook.fragment.RiskInspectionFragment;
+import com.wehealth.pdqbook.fragment.RiskResultFragment;
 import com.wehealth.pdqbook.fragment.SearchFragment;
 import com.wehealth.pdqbook.fragment.SearchResultFragment;
 import com.wehealth.pdqbook.getway.HttpConfigure;
@@ -57,6 +58,9 @@ public class PDQActivity extends AppCompatActivity implements BaseFragment.OnFra
             String url = uri.getQueryParameter(Strings.INTNET_CONTENT_URL).replaceAll("!!!", "#");
             String title = uri.getQueryParameter(Strings.INTENT_TITLE);
             changeFragment(CancerArticleQuestionFragment.newInstance(url, title));
+        } else if (fragment.equalsIgnoreCase(RiskInspectionFragment.class.getSimpleName())) {
+            String content = uri.getQueryParameter(Strings.INTENT_CONTENT);
+            changeFragment(RiskResultFragment.newInstance(content, ""));
         }
     }
 
