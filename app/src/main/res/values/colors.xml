@@ -13,4 +13,5 @@
     <color name="color_light_gray_item_divider">#ddd</color>
 
     <color name="color_popwindow">#44000000</color>
+    <color name="base_line">#E8E8E8</color>
 </resources>

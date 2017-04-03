@@ -77,7 +77,7 @@ public class RiskResultFragment extends BaseFragment {
 
     private void initView(View view) {
         ColorArcProgressBar bar = (ColorArcProgressBar) view.findViewById(R.id.score_progress_bar);
-        bar.setCurrentValues(Float.parseFloat(mScore));
+        bar.setCurrentValues(Float.parseFloat(mScore) * 10);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
