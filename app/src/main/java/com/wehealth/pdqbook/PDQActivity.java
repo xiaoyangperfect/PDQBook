@@ -60,7 +60,7 @@ public class PDQActivity extends AppCompatActivity implements BaseFragment.OnFra
             changeFragment(CancerArticleQuestionFragment.newInstance(url, title));
         } else if (fragment.equalsIgnoreCase(RiskInspectionFragment.class.getSimpleName())) {
             String content = uri.getQueryParameter(Strings.INTENT_CONTENT);
-            changeFragment(RiskResultFragment.newInstance(content, ""));
+            changeFragment(RiskResultFragment.newInstance(content));
         }
     }
 

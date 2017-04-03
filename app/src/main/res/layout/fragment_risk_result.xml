@@ -4,10 +4,10 @@
     android:layout_height="match_parent"
     tools:context="com.wehealth.pdqbook.fragment.RiskResultFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+
+    <com.wehealth.pdqbook.view.ColorArcProgressBar
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/score_progress_bar"/>
 
 </FrameLayout>
