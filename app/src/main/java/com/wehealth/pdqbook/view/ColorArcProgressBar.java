@@ -25,8 +25,6 @@ import com.wehealth.pdqbook.R;
      */
     public class ColorArcProgressBar extends View{
 
-        private int mWidth;
-        private int mHeight;
         //直径
         private int diameter = 500;
 
@@ -34,13 +32,13 @@ import com.wehealth.pdqbook.R;
         private float centerX;
         private float centerY;
 
-        private Paint allArcPaint;
-        private Paint progressPaint;
         private Paint vTextPaint;
-        private Paint hintPaint;
-        private Paint degreePaint;
+        private Paint advicePaint;
         private Paint curSpeedPaint;
-        private Paint centerCirclePaint;
+        private Paint largeBorderCirclePaint;
+        private Paint progressCirclePaint;
+        private Paint middleCirclePaint;
+        private Paint smallCirclePaint;
 
         private RectF bgRect;
         private RectF centerRect;
@@ -51,26 +49,23 @@ import com.wehealth.pdqbook.R;
         private float sweepAngle = 270;
         private float currentAngle = 0;
         private float lastAngle;
-        private int[] colors = new int[]{Color.GREEN, Color.YELLOW, Color.RED, Color.RED};
-        private float maxValues = 60;
+        private int[] colors = new int[]{Color.BLUE, Color.GREEN, Color.YELLOW, Color.parseColor("#FF7F00"), Color.RED};
+        private float maxValues = 100;
         private float curValues = 0;
+        private String curText;
         private float bgArcWidth = dipToPx(2);
         private float progressWidth = dipToPx(10);
-        private float textSize = dipToPx(60);
+        private float textSize = dipToPx(18);
         private float hintSize = dipToPx(15);
         private float curSpeedSize = dipToPx(13);
         private int aniSpeed = 1000;
         private float longDegree = dipToPx(13);
         private float shortDegree = dipToPx(5);
         private final int DEGREE_PROGRESS_DISTANCE = dipToPx(8);
-        private String hintColor = "#676767";
-        private String longDegreeColor = "#111111";
-        private String shortDegreeColor = "#111111";
-        private boolean isShowCurrentSpeed = true;
-        private String hintString = "Km/h";
+        private int hintColor = Color.WHITE;
+        private String hintString = "";
         private boolean isNeedTitle;
         private boolean isNeedUnit;
-        private boolean isNeedDial;
         private boolean isNeedContent;
         private String titleString;
 
@@ -103,10 +98,12 @@ import com.wehealth.pdqbook.R;
          */
         private void initConfig(Context context, AttributeSet attrs) {
             TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ColorArcProgressBar);
-            int color1 = a.getColor(R.styleable.ColorArcProgressBar_front_color1, Color.GREEN);
-            int color2 = a.getColor(R.styleable.ColorArcProgressBar_front_color2, color1);
-            int color3 = a.getColor(R.styleable.ColorArcProgressBar_front_color3, color1);
-            colors = new int[]{color1, color2, color3, color3};
+            int color1 = a.getColor(R.styleable.ColorArcProgressBar_front_color1, colors[0]);
+            int color2 = a.getColor(R.styleable.ColorArcProgressBar_front_color2, colors[1]);
+            int color3 = a.getColor(R.styleable.ColorArcProgressBar_front_color3, colors[2]);
+            int color4 = a.getColor(R.styleable.ColorArcProgressBar_front_color4, colors[3]);
+            int color5 = a.getColor(R.styleable.ColorArcProgressBar_front_color5, colors[4]);
+            colors = new int[]{color1, color2, color3, color4, color5};
 
             sweepAngle = a.getInteger(R.styleable.ColorArcProgressBar_total_engle, 270);
             bgArcWidth = a.getDimension(R.styleable.ColorArcProgressBar_back_width, dipToPx(2));
@@ -114,11 +111,10 @@ import com.wehealth.pdqbook.R;
             isNeedTitle = a.getBoolean(R.styleable.ColorArcProgressBar_is_need_title, false);
             isNeedContent = a.getBoolean(R.styleable.ColorArcProgressBar_is_need_content, false);
             isNeedUnit = a.getBoolean(R.styleable.ColorArcProgressBar_is_need_unit, false);
-            isNeedDial = a.getBoolean(R.styleable.ColorArcProgressBar_is_need_dial, false);
             hintString = a.getString(R.styleable.ColorArcProgressBar_string_unit);
             titleString = a.getString(R.styleable.ColorArcProgressBar_string_title);
             curValues = a.getFloat(R.styleable.ColorArcProgressBar_current_value, 0);
-            maxValues = a.getFloat(R.styleable.ColorArcProgressBar_max_value, 60);
+            maxValues = a.getFloat(R.styleable.ColorArcProgressBar_max_value, 100);
             setCurrentValues(curValues);
             setMaxValues(maxValues);
             a.recycle();
@@ -134,7 +130,7 @@ import com.wehealth.pdqbook.R;
 
         private void initView(Context context) {
 
-            diameter = 3 * getScreenWidth() / 5;
+            diameter = 7 * getScreenWidth() / 10;
             //弧形的矩阵区域
             bgRect = new RectF();
             bgRect.top = longDegree + progressWidth/2 + DEGREE_PROGRESS_DISTANCE;
@@ -151,56 +147,48 @@ import com.wehealth.pdqbook.R;
             centerX = (2 * longDegree + progressWidth + diameter + 2 * DEGREE_PROGRESS_DISTANCE)/2;
             centerY = (2 * longDegree + progressWidth + diameter + 2 * DEGREE_PROGRESS_DISTANCE)/2;
 
-            //外部刻度线
-            degreePaint = new Paint();
-            degreePaint.setColor(Color.parseColor(longDegreeColor));
-
             //整个弧形
-            allArcPaint = new Paint();
-            allArcPaint.setAntiAlias(true);
-            allArcPaint.setStyle(Paint.Style.STROKE);
-            allArcPaint.setStrokeWidth(bgArcWidth);
-            //Color.parseColor(bgArcColor)
-            allArcPaint.setColor(context.getResources().getColor(R.color.base_line));
-            allArcPaint.setStrokeCap(Paint.Cap.ROUND);
+            largeBorderCirclePaint = new Paint();
+            largeBorderCirclePaint.setAntiAlias(true);
+            largeBorderCirclePaint.setStyle(Paint.Style.STROKE);
+            largeBorderCirclePaint.setStrokeWidth(bgArcWidth);
+            largeBorderCirclePaint.setColor(context.getResources().getColor(R.color.base_line));
+            largeBorderCirclePaint.setStrokeCap(Paint.Cap.ROUND);
 
-            RadialGradient gradient = new RadialGradient(centerX, centerY, (float) diameter / 2 - bgArcWidth / 2,
-                    new int[]{Color.WHITE, Color.GRAY},
-                    new float[]{diameter / 2 - bgArcWidth / 2 - 10, diameter / 2 - bgArcWidth / 2 - 5}, Shader.TileMode.MIRROR);
-            centerCirclePaint = new Paint();
-    //        centerCirclePaint.setAntiAlias(true);
-    //        centerCirclePaint.setStyle(Paint.Style.STROKE);
-            centerCirclePaint.setStrokeWidth(15);
-    //        centerCirclePaint.setColor(context.getResources().getColor(R.color.base_line));
-    //        centerCirclePaint.setStrokeCap(Paint.Cap.ROUND);
-            centerCirclePaint.setShader(gradient);
-    //        centerCirclePaint.setShadowLayer(10, 0,0, context.getResources().getColor(R.color.base_line));
+            RadialGradient gradient = new RadialGradient(centerX, centerY, getMiddleRadius() + 10,
+                    new int[]{Color.WHITE, Color.parseColor("#FAFAFA")},
+                    new float[]{1f, 0.95f}, Shader.TileMode.MIRROR);
+            middleCirclePaint = new Paint();
+            middleCirclePaint.setShader(gradient);
 
             //当前进度的弧形
-            progressPaint = new Paint();
-            progressPaint.setAntiAlias(true);
-            progressPaint.setStyle(Paint.Style.STROKE);
-            progressPaint.setStrokeCap(Paint.Cap.ROUND);
-            progressPaint.setStrokeWidth(progressWidth);
-            progressPaint.setColor(Color.GREEN);
+            progressCirclePaint = new Paint();
+            progressCirclePaint.setAntiAlias(true);
+            progressCirclePaint.setStyle(Paint.Style.STROKE);
+            progressCirclePaint.setStrokeCap(Paint.Cap.ROUND);
+            progressCirclePaint.setStrokeWidth(progressWidth);
+            progressCirclePaint.setColor(Color.GREEN);
 
             //内容显示文字
             vTextPaint = new Paint();
             vTextPaint.setTextSize(textSize);
-            vTextPaint.setColor(Color.BLACK);
+            vTextPaint.setColor(Color.WHITE);
             vTextPaint.setTextAlign(Paint.Align.CENTER);
 
             //显示单位文字
-            hintPaint = new Paint();
-            hintPaint.setTextSize(hintSize);
-            hintPaint.setColor(Color.parseColor(hintColor));
-            hintPaint.setTextAlign(Paint.Align.CENTER);
+            advicePaint = new Paint();
+            advicePaint.setTextSize(hintSize);
+            advicePaint.setColor(hintColor);
+            advicePaint.setTextAlign(Paint.Align.CENTER);
 
             //显示标题文字
             curSpeedPaint = new Paint();
             curSpeedPaint.setTextSize(curSpeedSize);
-            curSpeedPaint.setColor(Color.parseColor(hintColor));
+            curSpeedPaint.setColor(hintColor);
             curSpeedPaint.setTextAlign(Paint.Align.CENTER);
+
+            smallCirclePaint = new Paint();
+            smallCirclePaint.setStrokeWidth(15);
 
         }
 
@@ -212,55 +200,37 @@ import com.wehealth.pdqbook.R;
             //抗锯齿
             canvas.setDrawFilter(new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG));
 
-            if (isNeedDial) {
-                //画刻度线
-                for (int i = 0; i < 40; i++) {
-                    if (i > 15 && i < 25) {
-                        canvas.rotate(9, centerX, centerY);
-                        continue;
-                    }
-                    if (i % 5 == 0) {
-                        degreePaint.setStrokeWidth(dipToPx(2));
-                        degreePaint.setColor(Color.parseColor(longDegreeColor));
-                        canvas.drawLine(centerX, centerY - diameter / 2 - progressWidth / 2 - DEGREE_PROGRESS_DISTANCE, centerX, centerY - diameter / 2 - progressWidth / 2 - DEGREE_PROGRESS_DISTANCE - longDegree, degreePaint);
-                    } else {
-                        degreePaint.setStrokeWidth(dipToPx(1.4f));
-                        degreePaint.setColor(Color.parseColor(shortDegreeColor));
-                        canvas.drawLine(centerX, centerY - diameter / 2 - progressWidth / 2 - DEGREE_PROGRESS_DISTANCE - (longDegree - shortDegree) / 2, centerX, centerY - diameter / 2 - progressWidth / 2 - DEGREE_PROGRESS_DISTANCE - (longDegree - shortDegree) / 2 - shortDegree, degreePaint);
-                    }
-
-                    canvas.rotate(9, centerX, centerY);
-                }
-            }
-
             //整个弧
-            canvas.drawArc(bgRect, startAngle, sweepAngle, false, allArcPaint);
-    //        canvas.drawArc(centerRect, startAngle, 360, false, centerCirclePaint);
+            canvas.drawArc(bgRect, startAngle, sweepAngle, false, largeBorderCirclePaint);
 
-            canvas.drawCircle(centerX, centerY, diameter / 2 - bgArcWidth / 2, centerCirclePaint);
+            canvas.drawCircle(centerX, centerY, getMiddleRadius(), middleCirclePaint);
+
+            smallCirclePaint.setColor(getCurrentColor(curValues));
+            canvas.drawCircle(centerX, centerY, getSmallRadius(), smallCirclePaint);
 
             //设置渐变色
             SweepGradient sweepGradient = new SweepGradient(centerX, centerY, colors, null);
             Matrix matrix = new Matrix();
             matrix.setRotate(130, centerX, centerY);
             sweepGradient.setLocalMatrix(matrix);
-            progressPaint.setShader(sweepGradient);
+            progressCirclePaint.setShader(sweepGradient);
+
 
             //当前进度
-            canvas.drawArc(bgRect, startAngle, currentAngle, false, progressPaint);
+            canvas.drawArc(bgRect, startAngle, currentAngle, false, progressCirclePaint);
 
             if (isNeedContent) {
-                canvas.drawText(String.format("%.0f", curValues), centerX, centerY + textSize / 3, vTextPaint);
+                //String.format("%.0f", curValues)
+                canvas.drawText(curText, centerX, centerY, vTextPaint);
             }
             if (isNeedUnit) {
-                canvas.drawText(hintString, centerX, centerY + 2 * textSize / 3, hintPaint);
+                canvas.drawText(hintString, centerX, centerY + textSize, advicePaint);
             }
             if (isNeedTitle) {
                 canvas.drawText(titleString, centerX, centerY - 2 * textSize / 3, curSpeedPaint);
             }
 
             invalidate();
-
         }
 
         /**
@@ -286,6 +256,23 @@ import com.wehealth.pdqbook.R;
             this.curValues = currentValues;
             lastAngle = currentAngle;
             setAnimation(lastAngle, currentValues * k, aniSpeed);
+            this.curText = "0";
+            if (currentValues <= 20) {
+                curText = getResources().getString(R.string.risk_0_2);
+                hintString = getResources().getString(R.string.advise_0_2);
+            } else if (20 < currentValues && currentValues <= 40) {
+                curText = getResources().getString(R.string.risk_2_4);
+                hintString = getResources().getString(R.string.advise_2_4);
+            } else if (40 < currentValues && currentValues <= 60) {
+                curText = getResources().getString(R.string.risk_4_6);
+                hintString = getResources().getString(R.string.advise_4_6);
+            } else if (60 < currentValues && currentValues <= 80) {
+                curText = getResources().getString(R.string.risk_6_8);
+                hintString = getResources().getString(R.string.advise_6_8);
+            } else if (80 < currentValues && currentValues <= 100) {
+                curText = getResources().getString(R.string.risk_8_10);
+                hintString = getResources().getString(R.string.advise_8_10);
+            }
         }
 
         /**
@@ -379,11 +366,51 @@ import com.wehealth.pdqbook.R;
             return displayMetrics.widthPixels;
         }
 
-        public void setIsShowCurrentSpeed(boolean isShowCurrentSpeed) {
-            this.isShowCurrentSpeed = isShowCurrentSpeed;
+        /**
+         * 获取最小圆半径
+         * @return
+         */
+        private float getSmallRadius() {
+            return diameter / 4;
         }
 
+        /**
+         * 获取中间圆半径
+         * @return
+         */
+        private float getMiddleRadius() {
+            return diameter / 2 - bgArcWidth / 2;
+        }
 
+        /**
+         * 颜色渐变算法
+         * 获取某个百分比下的渐变颜色值
+         *
+         * @param value
+         * @return
+         */
+        private int getCurrentColor(float value) {
+            float percent = value / 100;
+            float[][] f = new float[colors.length][3];
+            for (int i = 0; i < colors.length; i++) {
+                f[i][0] = (colors[i] & 0xff0000) >> 16;
+                f[i][1] = (colors[i] & 0x00ff00) >> 8;
+                f[i][2] = (colors[i] & 0x0000ff);
+            }
+            float[] result = new float[3];
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < f.length; j++) {
+                    if (f.length == 1 || percent == j / (f.length - 1f)) {
+                        result = f[j];
+                    } else {
+                        if (percent > j / (f.length - 1f) && percent < (j + 1f) / (f.length - 1)) {
+                            result[i] = f[j][i] - (f[j][i] - f[j + 1][i]) * (percent - j / (f.length - 1f)) * (f.length - 1f);
+                        }
+                    }
+                }
+            }
+            return Color.rgb((int) result[0], (int) result[1], (int) result[2]);
+        }
 
 
     }
