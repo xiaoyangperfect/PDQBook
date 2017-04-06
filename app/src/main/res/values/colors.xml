@@ -14,4 +14,14 @@
 
     <color name="color_popwindow">#44000000</color>
     <color name="base_line">#E8E8E8</color>
+
+    <!-- risk result -->
+    <color name="color_arc_blue">#68d4ff</color>
+    <color name="color_arc_green">#b1eec0</color>
+    <color name="color_arc_yellow">#ffeb67</color>
+    <color name="color_arc_orange">#ffc438</color>
+    <color name="color_arc_red">#ff0000</color>
+
+    <color name="color_text_gray">#44000000</color>
+
 </resources>

@@ -5,22 +5,97 @@
     android:layout_height="match_parent"
     tools:context="com.wehealth.pdqbook.fragment.RiskResultFragment">
 
+    <TextView
+        android:id="@+id/risk_result_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/risk_title_top_padding"
+        android:text="@string/risk_result"
+        android:textColor="@color/color_navy"
+        android:textSize="@dimen/main_page_title_size" />
+
+    <TextView
+        android:id="@+id/risk_result_title_sub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/risk_result_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/risk_sub_title_top_padding"
+        android:text="@string/risk_result_sub_title"
+        android:textColor="@color/color_popwindow"
+        android:textSize="@dimen/main_page_title_sub_size" />
 
     <com.wehealth.pdqbook.view.ColorArcProgressBar
         android:id="@+id/score_progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/risk_result_title_sub"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        app:is_need_content="true"
-        app:max_value="100"
+        android:layout_marginTop="30dp"
+        app:back_color="@android:color/darker_gray"
         app:back_width="20dp"
         app:front_width="19dp"
-        app:total_engle="270"
-        app:is_need_unit="true"
-        app:string_unit="km/h"
+        app:is_need_content="true"
         app:is_need_title="false"
+        app:is_need_unit="true"
+        app:max_value="100"
         app:string_title=""
-        app:back_color="@android:color/darker_gray" />
+        app:string_unit="km/h"
+        app:total_engle="270" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/risk_result_back"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/risk_title_top_padding"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/score_progress_bar"
+        android:layout_marginTop="50dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_weight="1">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <View
+                    android:layout_width="@dimen/risk_sub_text_small"
+                    android:layout_height="@dimen/risk_sub_text_small"
+                    android:background="@color/color_arc_blue"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/risk_sub_title_top_padding"
+                    android:textSize="@dimen/risk_sub_text_small"
+                    android:textColor="@color/color_text_gray"
+                    android:text="@string/advise_0_2"/>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+        </LinearLayout>
+    </LinearLayout>
 
 </RelativeLayout>

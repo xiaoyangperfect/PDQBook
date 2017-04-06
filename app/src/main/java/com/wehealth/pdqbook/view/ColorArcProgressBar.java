@@ -49,7 +49,11 @@ import com.wehealth.pdqbook.R;
         private float sweepAngle = 270;
         private float currentAngle = 0;
         private float lastAngle;
-        private int[] colors = new int[]{Color.BLUE, Color.GREEN, Color.YELLOW, Color.parseColor("#FF7F00"), Color.RED};
+        private int[] colors = new int[]{getResources().getColor(R.color.color_arc_blue),
+                getResources().getColor(R.color.color_arc_green),
+                getResources().getColor(R.color.color_arc_yellow),
+                getResources().getColor(R.color.color_arc_orange),
+                getResources().getColor(R.color.color_arc_red)};
         private float maxValues = 100;
         private float curValues = 0;
         private String curText;

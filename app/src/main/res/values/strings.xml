@@ -29,7 +29,9 @@
     <string name="search_hint">请输入查询内容</string>
     <string name="search_error">查询失败</string>
 
+    <!-- risk result -->
     <string name="risk_result">风险监测结果</string>
+    <string name="risk_result_sub_title">美国哈弗研究院</string>
 
     <string name="risk_0_2">极低致癌风险</string>
     <string name="risk_2_4">较低致癌风险</string>
