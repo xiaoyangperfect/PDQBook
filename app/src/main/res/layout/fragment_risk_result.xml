@@ -5,97 +5,235 @@
     android:layout_height="match_parent"
     tools:context="com.wehealth.pdqbook.fragment.RiskResultFragment">
 
-    <TextView
-        android:id="@+id/risk_result_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/risk_title_top_padding"
-        android:text="@string/risk_result"
-        android:textColor="@color/color_navy"
-        android:textSize="@dimen/main_page_title_size" />
-
-    <TextView
-        android:id="@+id/risk_result_title_sub"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/risk_result_title"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/risk_sub_title_top_padding"
-        android:text="@string/risk_result_sub_title"
-        android:textColor="@color/color_popwindow"
-        android:textSize="@dimen/main_page_title_sub_size" />
-
-    <com.wehealth.pdqbook.view.ColorArcProgressBar
-        android:id="@+id/score_progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/risk_result_title_sub"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        app:back_color="@android:color/darker_gray"
-        app:back_width="20dp"
-        app:front_width="19dp"
-        app:is_need_content="true"
-        app:is_need_title="false"
-        app:is_need_unit="true"
-        app:max_value="100"
-        app:string_title=""
-        app:string_unit="km/h"
-        app:total_engle="270" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/risk_result_back"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="@dimen/risk_title_top_padding"/>
-
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@id/score_progress_bar"
-        android:layout_marginTop="50dp">
+        android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_height="match_parent"
             android:gravity="center_horizontal"
-            android:layout_weight="1">
-            <LinearLayout
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/risk_result_back"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="right"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="@dimen/risk_title_top_padding" />
+
+            <TextView
+                android:id="@+id/risk_result_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <View
-                    android:layout_width="@dimen/risk_sub_text_small"
-                    android:layout_height="@dimen/risk_sub_text_small"
-                    android:background="@color/color_arc_blue"/>
+                android:layout_centerHorizontal="true"
+                android:text="@string/risk_result"
+                android:textColor="@color/color_navy"
+                android:textSize="@dimen/main_page_title_size" />
 
-                <TextView
+            <TextView
+                android:id="@+id/risk_result_title_sub"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/risk_result_title"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/risk_sub_title_top_padding"
+                android:text="@string/risk_result_sub_title"
+                android:textColor="@color/color_popwindow"
+                android:textSize="@dimen/main_page_title_sub_size" />
+
+            <com.wehealth.pdqbook.view.ColorArcProgressBar
+                android:id="@+id/score_progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/risk_result_title_sub"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                app:back_color="@android:color/darker_gray"
+                app:back_width="20dp"
+                app:front_width="19dp"
+                app:is_need_content="true"
+                app:is_need_title="false"
+                app:is_need_unit="true"
+                app:max_value="100"
+                app:string_title=""
+                app:string_unit="km/h"
+                app:total_engle="270" />
+
+
+            <LinearLayout
+                android:id="@+id/risk_result_desc_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="@dimen/risk_sub_text_small"
+                        android:layout_height="@dimen/risk_sub_text_small"
+                        android:background="@color/color_arc_blue" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/risk_sub_title_top_padding"
+                        android:text="@string/advise_0_2"
+                        android:textColor="@color/color_text_gray"
+                        android:textSize="@dimen/risk_sub_text_small" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="@dimen/risk_sub_text_small"
+                        android:layout_height="@dimen/risk_sub_text_small"
+                        android:background="@color/color_arc_green" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/risk_sub_title_top_padding"
+                        android:text="@string/advise_2_4"
+                        android:textColor="@color/color_text_gray"
+                        android:textSize="@dimen/risk_sub_text_small" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="@dimen/risk_sub_text_small"
+                        android:layout_height="@dimen/risk_sub_text_small"
+                        android:background="@color/color_arc_yellow" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/risk_sub_title_top_padding"
+                        android:text="@string/advise_4_6"
+                        android:textColor="@color/color_text_gray"
+                        android:textSize="@dimen/risk_sub_text_small" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/risk_result_desc_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="@dimen/risk_sub_text_small"
+                        android:layout_height="@dimen/risk_sub_text_small"
+                        android:background="@color/color_arc_blue" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/risk_sub_title_top_padding"
+                        android:text="@string/advise_0_2"
+                        android:textColor="@color/color_text_gray"
+                        android:textSize="@dimen/risk_sub_text_small" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="@dimen/risk_sub_text_small"
+                        android:layout_height="@dimen/risk_sub_text_small"
+                        android:background="@color/color_arc_red" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/risk_sub_title_top_padding"
+                        android:text="@string/advise_2_4"
+                        android:textColor="@color/color_text_gray"
+                        android:textSize="@dimen/risk_sub_text_small" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="30dp"
+                android:gravity="center"
+                android:text="@string/feiai_warning"
+                android:textColor="@color/color_text_gray"
+                android:textSize="@dimen/main_page_title_sub_size"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/risk_result_more_info"
+                android:gravity="center"
+                android:text="@string/more_feiai_info"
+                android:textColor="@color/color_text_navy"
+                android:textSize="@dimen/main_page_title_sub_size"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="30dp">
+                <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/risk_sub_title_top_padding"
-                    android:textSize="@dimen/risk_sub_text_small"
-                    android:textColor="@color/color_text_gray"
-                    android:text="@string/advise_0_2"/>
-            </LinearLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1">
+                    android:id="@+id/risk_result_realize"
+                    android:layout_alignParentLeft="true"
+                    android:text="@string/realize_health_examination"
+                    android:textSize="@dimen/main_page_title_sub_size"
+                    android:textColor="@android:color/white"/>
 
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/risk_result_order"
+                    android:layout_alignParentRight="true"
+                    android:text="@string/order_health_examination"
+                    android:textSize="@dimen/main_page_title_sub_size"
+                    android:textColor="@android:color/white"/>
+            </RelativeLayout>
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_weight="1">
-
-        </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>

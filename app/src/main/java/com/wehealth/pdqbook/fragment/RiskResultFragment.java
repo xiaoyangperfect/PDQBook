@@ -8,8 +8,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
+import com.wehealth.pdqbook.PDQActivity;
 import com.wehealth.pdqbook.R;
+import com.wehealth.pdqbook.getway.repertory.CancerDataConfigure;
+import com.wehealth.pdqbook.tool.Strings;
 import com.wehealth.pdqbook.view.ColorArcProgressBar;
 
 /**
@@ -20,7 +25,7 @@ import com.wehealth.pdqbook.view.ColorArcProgressBar;
  * Use the {@link RiskResultFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class RiskResultFragment extends BaseFragment {
+public class RiskResultFragment extends BaseFragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String SCORE = "score";
@@ -78,6 +83,21 @@ public class RiskResultFragment extends BaseFragment {
     private void initView(View view) {
         ColorArcProgressBar bar = (ColorArcProgressBar) view.findViewById(R.id.score_progress_bar);
         bar.setCurrentValues(Float.parseFloat(mScore) * 10);
+        TextView moreInfo = (TextView) view.findViewById(R.id.risk_result_more_info);
+        moreInfo.setOnClickListener(this);
+        Button backBtn = (Button) view.findViewById(R.id.risk_result_back);
+        backBtn.setOnClickListener(this);
+    }
+
+    private void getMoreInfo(CancerDataConfigure data) {
+        String url = String.valueOf(data.getIndex());
+        String urlType = Strings.IntentActionUrlType.cancerPage.toString();
+        String title = getResources().getString(data.getTextResource());
+        String uri = Strings.getIntentUri(RiskResultFragment.class.getSimpleName(),
+                Strings.INTNET_CONTENT_URL, url,
+                Strings.INTENT_ACTION_TYPE, urlType,
+                Strings.INTENT_TITLE, title);
+        onButtonPressed(Uri.parse(uri));
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -108,5 +128,17 @@ public class RiskResultFragment extends BaseFragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.risk_result_more_info:
+                getMoreInfo(CancerDataConfigure.Fei);
+                break;
+            case R.id.risk_result_back:
+                ((PDQActivity) getActivity()).clickBack();
+                break;
+        }
     }
 }

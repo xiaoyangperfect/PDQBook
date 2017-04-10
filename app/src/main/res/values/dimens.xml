@@ -28,7 +28,7 @@
     <dimen name="popwindow_margin_window">40dp</dimen>
 
     <!-- risk result -->
-    <dimen name="risk_title_top_padding">20dp</dimen>
+    <dimen name="risk_title_top_padding">30dp</dimen>
     <dimen name="risk_sub_title_top_padding">5dp</dimen>
     <dimen name="risk_sub_text_small">10dp</dimen>
 </resources>
