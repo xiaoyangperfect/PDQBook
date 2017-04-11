@@ -1,0 +1,22 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.wehealth.pdqbook.fragment.AppointmentFragment">
+
+    <WebView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/webpager_appointment"/>
+
+    <com.wehealth.pdqbook.view.CircleProgressBar
+        app:mlpb_enable_circle_background="true"
+        app:mlpb_progress_stoke_width="5dp"
+        app:mlpb_progress_text_visibility="visible"
+        android:layout_width="@dimen/circle_progress_bar_diameter"
+        android:layout_height="@dimen/circle_progress_bar_diameter"
+        app:mlpb_progress_text_size="@dimen/circle_progress_bar_text_size"
+        android:id="@+id/webpage_appointment_progressbar"
+        android:layout_centerInParent="true"/>
+</FrameLayout>

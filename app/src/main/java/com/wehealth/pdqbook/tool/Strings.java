@@ -20,7 +20,8 @@ public class Strings {
         cancerPage,
         riskInspection,
         search,
-        cancerArticleQuestion
+        cancerArticleQuestion,
+        appointment
     }
 
     //fragment onclick listener param uri

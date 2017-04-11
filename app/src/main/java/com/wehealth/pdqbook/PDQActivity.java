@@ -70,9 +70,7 @@ public class PDQActivity extends AppCompatActivity implements BaseFragment.OnFra
             String content = uri.getQueryParameter(Strings.INTENT_CONTENT);
             changeFragment(RiskResultFragment.newInstance(content), false);
         } else if (fragment.equalsIgnoreCase(RiskResultFragment.class.getSimpleName())) {
-            String urlIndex = uri.getQueryParameter(Strings.INTNET_CONTENT_URL);
-            String title = uri.getQueryParameter(Strings.INTENT_TITLE);
-            changeFragment(CancerFragment.newInstance(urlIndex, title), false);
+            onActionRiskResultFragment(uri);
         }
     }
 
@@ -90,7 +88,17 @@ public class PDQActivity extends AppCompatActivity implements BaseFragment.OnFra
             String url = urlIndex.replaceAll("!!!", "#");
             changeFragment(CancerArticleQuestionFragment.newInstance(url, title), true);
         }
+    }
 
+    private void onActionRiskResultFragment(Uri uri) {
+        String urlIndex = uri.getQueryParameter(Strings.INTNET_CONTENT_URL);
+        String title = uri.getQueryParameter(Strings.INTENT_TITLE);
+        String type = uri.getQueryParameter(Strings.INTENT_ACTION_TYPE);
+        if (type.equalsIgnoreCase(Strings.IntentActionUrlType.cancerPage.toString())) {
+            changeFragment(CancerFragment.newInstance(urlIndex, title), false);
+        } else if (type.equalsIgnoreCase(Strings.IntentActionUrlType.appointment.toString())){
+
+        }
     }
 
     //get search records

@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.wehealth.pdqbook.PDQActivity;
 import com.wehealth.pdqbook.R;
+import com.wehealth.pdqbook.getway.HttpConfigure;
 import com.wehealth.pdqbook.getway.repertory.CancerDataConfigure;
 import com.wehealth.pdqbook.tool.Strings;
 import com.wehealth.pdqbook.view.ColorArcProgressBar;
@@ -87,12 +88,25 @@ public class RiskResultFragment extends BaseFragment implements View.OnClickList
         moreInfo.setOnClickListener(this);
         Button backBtn = (Button) view.findViewById(R.id.risk_result_back);
         backBtn.setOnClickListener(this);
+        Button appointmentBtn = (Button) view.findViewById(R.id.risk_result_order);
+        appointmentBtn.setOnClickListener(this);
     }
 
     private void getMoreInfo(CancerDataConfigure data) {
         String url = String.valueOf(data.getIndex());
         String urlType = Strings.IntentActionUrlType.cancerPage.toString();
         String title = getResources().getString(data.getTextResource());
+        String uri = Strings.getIntentUri(RiskResultFragment.class.getSimpleName(),
+                Strings.INTNET_CONTENT_URL, url,
+                Strings.INTENT_ACTION_TYPE, urlType,
+                Strings.INTENT_TITLE, title);
+        onButtonPressed(Uri.parse(uri));
+    }
+
+    private void intentToAppointment() {
+        String url = HttpConfigure.getAppointmentUrl();
+        String urlType = Strings.IntentActionUrlType.appointment.toString();
+        String title =getResources().getString(R.string.order_health_examination);
         String uri = Strings.getIntentUri(RiskResultFragment.class.getSimpleName(),
                 Strings.INTNET_CONTENT_URL, url,
                 Strings.INTENT_ACTION_TYPE, urlType,
@@ -138,6 +152,9 @@ public class RiskResultFragment extends BaseFragment implements View.OnClickList
                 break;
             case R.id.risk_result_back:
                 ((PDQActivity) getActivity()).clickBack();
+                break;
+            case R.id.risk_result_order:
+                intentToAppointment();
                 break;
         }
     }

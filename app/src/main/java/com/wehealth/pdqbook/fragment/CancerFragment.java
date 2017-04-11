@@ -191,6 +191,7 @@ public class CancerFragment extends BaseFragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString(WEB_URL_INDEX, mUrlIndex);
+        outState.putString(TITLE, mTitle);
     }
 
     @Override

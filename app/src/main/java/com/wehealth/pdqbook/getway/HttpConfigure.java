@@ -18,6 +18,8 @@ public class HttpConfigure {
     //搜索接口
     private static final String URL_SEARCH = "http://ps.wehealth.mobi/API//NCC/Search?keyword=%s";
 
+    private static final String URL_APPOINTMENT = "http://ty.ddiaos.cn/PDQtijian/hospital.html";
+
     //cancerWebSection = @{@"0":@"Prevention", @"1":@"Screening", @"2":@"Treatment"};
 //    tabBarNames = @[@"预防", @"筛查", @"治疗"];
     public static final String param_cancerpage_index_prevention = "Prevention";
@@ -42,5 +44,9 @@ public class HttpConfigure {
 
     public static String getSearchUrl(String content) {
         return String.format(URL_SEARCH, content);
+    }
+
+    public static String getAppointmentUrl() {
+        return URL_APPOINTMENT;
     }
 }
