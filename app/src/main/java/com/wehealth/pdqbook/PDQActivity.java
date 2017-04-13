@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
+import com.wehealth.pdqbook.fragment.AppointmentFragment;
 import com.wehealth.pdqbook.fragment.BaseFragment;
 import com.wehealth.pdqbook.fragment.CancerArticleQuestionFragment;
 import com.wehealth.pdqbook.fragment.CancerFragment;
@@ -97,7 +98,7 @@ public class PDQActivity extends AppCompatActivity implements BaseFragment.OnFra
         if (type.equalsIgnoreCase(Strings.IntentActionUrlType.cancerPage.toString())) {
             changeFragment(CancerFragment.newInstance(urlIndex, title), false);
         } else if (type.equalsIgnoreCase(Strings.IntentActionUrlType.appointment.toString())){
-
+            changeFragment(AppointmentFragment.newInstance(urlIndex, title), false);
         }
     }
 
