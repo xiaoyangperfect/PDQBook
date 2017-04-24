@@ -95,9 +95,9 @@ public class RiskInspectionFragment extends BaseFragment {
                 if (BuildConfig.DEBUG) {
                     Log.e(TAG, json);
                 }
-//                RiskResult riskResult = RiskResult.parser(json);
+                RiskResult riskResult = RiskResult.parser(json);
                 final String uri = Strings.getIntentUri(RiskInspectionFragment.class.getSimpleName(),
-                        Strings.INTENT_CONTENT, String.valueOf(8.5));
+                        Strings.INTENT_CONTENT, String.valueOf(riskResult.getData().getF2()));
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
