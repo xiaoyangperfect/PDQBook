@@ -5,22 +5,22 @@ package com.wehealth.pdqbook.getway.model;
  */
 
 public class RiskResultData {
-    private int f1;
-    private int f2;
+    private double f1;
+    private float f2;
 
-    public int getF1() {
+    public double getF1() {
         return f1;
     }
 
-    public void setF1(int f1) {
+    public void setF1(double f1) {
         this.f1 = f1;
     }
 
-    public int getF2() {
+    public float getF2() {
         return f2;
     }
 
-    public void setF2(int f2) {
+    public void setF2(float f2) {
         this.f2 = f2;
     }
 }
