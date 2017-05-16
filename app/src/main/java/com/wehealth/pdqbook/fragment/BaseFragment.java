@@ -4,16 +4,10 @@ import android.annotation.SuppressLint;
 import android.net.Uri;
 import android.os.Build;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.widget.TextView;
 
-import com.wehealth.pdqbook.PDQActivity;
-import com.wehealth.pdqbook.R;
 import com.wehealth.pdqbook.tool.WebJavascriptInterface;
-import com.wehealth.pdqbook.tool.WebSectionJavascriptInterface;
 import com.wehealth.pdqbook.tool.PDQWebClient;
 import com.wehealth.pdqbook.view.CircleProgressBar;
 

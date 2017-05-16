@@ -14,9 +14,8 @@ import android.webkit.WebView;
 import android.widget.TextView;
 
 import com.wehealth.pdqbook.BuildConfig;
-import com.wehealth.pdqbook.PDQActivity;
+import com.wehealth.pdqbook.activity.PDQActivity;
 import com.wehealth.pdqbook.R;
-import com.wehealth.pdqbook.tool.WebListJavascriptInterface;
 import com.wehealth.pdqbook.view.CircleProgressBar;
 
 /**

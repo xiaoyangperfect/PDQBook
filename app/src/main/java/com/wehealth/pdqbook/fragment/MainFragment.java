@@ -1,16 +1,24 @@
 package com.wehealth.pdqbook.fragment;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 
 import com.wehealth.pdqbook.R;
 import com.wehealth.pdqbook.getway.repertory.CancerDataConfigure;
+import com.wehealth.pdqbook.tool.AnimationUtil;
+import com.wehealth.pdqbook.tool.FastBlur;
+import com.wehealth.pdqbook.tool.ScreenShortCutUtil;
 import com.wehealth.pdqbook.tool.Strings;
 import com.wehealth.pdqbook.view.CircleLayout;
 
@@ -46,13 +54,15 @@ public class MainFragment extends BaseFragment implements View.OnClickListener {
         super.onCreate(savedInstanceState);
     }
 
+    View layoutView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_main, container, false);
-        initView(view);
-        return view;
+        layoutView = inflater.inflate(R.layout.fragment_main, container, false);
+        initView(layoutView);
+        return layoutView;
     }
 
     private void initView(View view) {
@@ -125,18 +135,20 @@ public class MainFragment extends BaseFragment implements View.OnClickListener {
             case R.id.mainpage_search_layout:
                 urlType = Strings.IntentActionUrlType.search.toString();
                 title = getString(R.string.search);
+                String uri = Strings.getIntentUri(MainFragment.class.getSimpleName(),
+                        Strings.INTNET_CONTENT_URL, url,
+                        Strings.INTENT_ACTION_TYPE, urlType,
+                        Strings.INTENT_TITLE, title);
+
+                onButtonPressed(Uri.parse(uri));
                 break;
             case R.id.mainpage_about_layout:
-                urlType = Strings.IntentActionUrlType.riskInspection.toString();
-                title = getString(R.string.risk_inspection);
+//                urlType = Strings.IntentActionUrlType.riskInspection.toString();
+//                title = getString(R.string.risk_inspection);
+                showAboutPDQ();
                 break;
         }
-        String uri = Strings.getIntentUri(MainFragment.class.getSimpleName(),
-                Strings.INTNET_CONTENT_URL, url,
-                Strings.INTENT_ACTION_TYPE, urlType,
-                Strings.INTENT_TITLE, title);
 
-        onButtonPressed(Uri.parse(uri));
     }
 
     //call when user click cancer button
@@ -149,5 +161,25 @@ public class MainFragment extends BaseFragment implements View.OnClickListener {
                 Strings.INTENT_ACTION_TYPE, urlType,
                 Strings.INTENT_TITLE, title);
         onButtonPressed(Uri.parse(uri));
+    }
+
+    private void showAboutPDQ() {
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.pop_about_pdq, null);
+        try {
+            Bitmap screenBitmap = ScreenShortCutUtil.getShortScreen(getActivity());
+            if (screenBitmap != null) {
+                FastBlur.blur(getContext(), screenBitmap, view);
+                screenBitmap.recycle();
+            }
+
+        } catch (Exception ex) {
+
+        }
+        Animation animation = AnimationUtil.initAlphaShowAnimation();
+        PopupWindow popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, false);
+        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.setFocusable(true);
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
     }
 }

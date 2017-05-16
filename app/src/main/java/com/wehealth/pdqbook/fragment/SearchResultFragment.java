@@ -1,8 +1,6 @@
 package com.wehealth.pdqbook.fragment;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,7 +15,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.wehealth.pdqbook.PDQActivity;
+import com.wehealth.pdqbook.activity.PDQActivity;
 import com.wehealth.pdqbook.R;
 import com.wehealth.pdqbook.adapter.SearchResultAdapter;
 import com.wehealth.pdqbook.adapter.SearchResultPopWindowListAdapter;
@@ -26,7 +24,6 @@ import com.wehealth.pdqbook.getway.error.PDQException;
 import com.wehealth.pdqbook.getway.model.SearchResult;
 import com.wehealth.pdqbook.getway.model.SearchResultInfoEntry;
 import com.wehealth.pdqbook.getway.model.SearchResultListEntry;
-import com.wehealth.pdqbook.listener.OnItemClickListener;
 import com.wehealth.pdqbook.listener.OnItemClickListenerWithViewCallBack;
 import com.wehealth.pdqbook.tool.Strings;
 import com.wehealth.pdqbook.view.CircleProgressBar;

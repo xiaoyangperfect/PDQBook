@@ -3,7 +3,6 @@ package com.wehealth.pdqbook.fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wehealth.pdqbook.BuildConfig;
-import com.wehealth.pdqbook.PDQActivity;
+import com.wehealth.pdqbook.activity.PDQActivity;
 import com.wehealth.pdqbook.R;
 import com.wehealth.pdqbook.tool.WebListJavascriptInterface;
 import com.wehealth.pdqbook.view.CircleProgressBar;

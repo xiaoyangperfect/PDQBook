@@ -1,11 +1,11 @@
-package com.wehealth.pdqbook;
+package com.wehealth.pdqbook.activity;
 
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
+import com.wehealth.pdqbook.R;
 import com.wehealth.pdqbook.fragment.AppointmentFragment;
 import com.wehealth.pdqbook.fragment.BaseFragment;
 import com.wehealth.pdqbook.fragment.CancerArticleQuestionFragment;
@@ -106,4 +106,6 @@ public class PDQActivity extends AppCompatActivity implements BaseFragment.OnFra
     public ArrayList<SearchRecord> getSearchRecord() {
         return SearchRecord.get();
     }
+
+
 }

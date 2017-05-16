@@ -15,12 +15,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.wehealth.pdqbook.BuildConfig;
-import com.wehealth.pdqbook.PDQActivity;
+import com.wehealth.pdqbook.activity.PDQActivity;
 import com.wehealth.pdqbook.R;
 import com.wehealth.pdqbook.adapter.FragPagerAdapter;
-import com.wehealth.pdqbook.adapter.ViewPagerAdapter;
 import com.wehealth.pdqbook.getway.HttpConfigure;
-import com.wehealth.pdqbook.view.CircleProgressBar;
 
 import java.util.ArrayList;
 

@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.wehealth.pdqbook.PDQActivity;
+import com.wehealth.pdqbook.activity.PDQActivity;
 import com.wehealth.pdqbook.R;
 import com.wehealth.pdqbook.getway.HttpConfigure;
 import com.wehealth.pdqbook.getway.repertory.CancerDataConfigure;
