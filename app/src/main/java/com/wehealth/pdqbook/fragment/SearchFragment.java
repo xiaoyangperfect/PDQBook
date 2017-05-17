@@ -21,7 +21,7 @@ import com.wehealth.pdqbook.activity.PDQActivity;
 import com.wehealth.pdqbook.R;
 import com.wehealth.pdqbook.adapter.SearchRecordsAdapter;
 import com.wehealth.pdqbook.getway.datamodel.SearchRecord;
-import com.wehealth.pdqbook.getway.repertory.SharedPrefrence;
+import com.wehealth.pdqbook.getway.repertory.SharedPreferenceUtil;
 import com.wehealth.pdqbook.getway.repertory.db.PDQDB;
 import com.wehealth.pdqbook.getway.repertory.db.table.SearchRecordTable;
 import com.wehealth.pdqbook.tool.Strings;
@@ -178,7 +178,7 @@ public class SearchFragment extends BaseFragment {
         SearchRecordTable table = new SearchRecordTable(PDQDB.instance().getWritableDatabase());
         ContentValues values = new ContentValues();
         values.put(SearchRecordTable.SEARCH_RECORD_CONTENT, search);
-        values.put(SearchRecordTable.SEARCH_RECORD_USER, SharedPrefrence.USER);
+        values.put(SearchRecordTable.SEARCH_RECORD_USER, SharedPreferenceUtil.USER);
         values.put(SearchRecordTable.SEARCH_RECORD_DATE, System.currentTimeMillis());
         values.put(SearchRecordTable.SEARCH_RECORD_NUMBER, 1);
         values.put(SearchRecordTable.SEARCH_RECORD_STATUS, SearchRecordTable.SearchStatus.success.toString());

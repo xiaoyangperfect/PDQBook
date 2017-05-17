@@ -145,6 +145,10 @@ public class MainFragment extends BaseFragment implements View.OnClickListener {
             case R.id.mainpage_about_layout:
 //                urlType = Strings.IntentActionUrlType.riskInspection.toString();
 //                title = getString(R.string.risk_inspection);
+//                onButtonPressed(Uri.parse(Strings.getIntentUri(MainFragment.class.getSimpleName(),
+//                        Strings.INTNET_CONTENT_URL, url,
+//                        Strings.INTENT_ACTION_TYPE, urlType,
+//                        Strings.INTENT_TITLE, title)));
                 showAboutPDQ();
                 break;
         }
@@ -175,11 +179,11 @@ public class MainFragment extends BaseFragment implements View.OnClickListener {
         } catch (Exception ex) {
 
         }
-        Animation animation = AnimationUtil.initAlphaShowAnimation();
         PopupWindow popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, false);
         popupWindow.setBackgroundDrawable(new BitmapDrawable());
         popupWindow.setOutsideTouchable(true);
         popupWindow.setFocusable(true);
+        popupWindow.setAnimationStyle(R.style.popwindow_anim);
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
     }
 }

@@ -15,6 +15,7 @@ import com.wehealth.pdqbook.fragment.RiskInspectionFragment;
 import com.wehealth.pdqbook.fragment.RiskResultFragment;
 import com.wehealth.pdqbook.fragment.SearchFragment;
 import com.wehealth.pdqbook.fragment.SearchResultFragment;
+import com.wehealth.pdqbook.fragment.WelcomeFragment;
 import com.wehealth.pdqbook.getway.HttpConfigure;
 import com.wehealth.pdqbook.getway.datamodel.SearchRecord;
 import com.wehealth.pdqbook.tool.Strings;
@@ -30,7 +31,8 @@ public class PDQActivity extends AppCompatActivity implements BaseFragment.OnFra
 
 
         if (findViewById(R.id.fragment_container) != null) {
-            BaseFragment mainFragment = MainFragment.newInstance();
+            BaseFragment mainFragment = WelcomeFragment.newInstance();
+//            BaseFragment mainFragment = MainFragment.newInstance();
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.fragment_container, mainFragment).commit();
         }
@@ -72,6 +74,8 @@ public class PDQActivity extends AppCompatActivity implements BaseFragment.OnFra
             changeFragment(RiskResultFragment.newInstance(content), false);
         } else if (fragment.equalsIgnoreCase(RiskResultFragment.class.getSimpleName())) {
             onActionRiskResultFragment(uri);
+        } else if (fragment.equalsIgnoreCase(WelcomeFragment.class.getSimpleName())) {
+            changeFragment(MainFragment.newInstance(), false);
         }
     }
 
