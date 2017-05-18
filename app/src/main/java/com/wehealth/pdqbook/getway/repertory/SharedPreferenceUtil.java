@@ -10,7 +10,9 @@ import com.wehealth.pdqbook.content.AppContext;
  */
 
 public class SharedPreferenceUtil {
-    public static final String USER = "admin";
+    public static String USER = "admin";
+
+    private String WELCOME_SHOW_NUM = "welcomeShowNum";
 
     private SharedPreferences sp;
 
@@ -18,27 +20,11 @@ public class SharedPreferenceUtil {
         sp = AppContext.instance().getSharedPreferences(USER, Context.MODE_PRIVATE);
     }
 
-    public void putString(String key, String value) {
-        sp.edit().putString(key, value);
+    public int getWelcomeShowNum() {
+        return sp.getInt(WELCOME_SHOW_NUM, 0);
     }
 
-    public String getString(String key) {
-        return sp.getString(key, null);
-    }
-
-    public void putBoolean(String key, boolean value) {
-        sp.edit().putBoolean(key, value);
-    }
-
-    public void putInt(String key, int value) {
-        sp.edit().putInt(key, value);
-    }
-
-    public void putFloat(String key, float value) {
-        sp.edit().putFloat(key, value);
-    }
-
-    public void putLong(String key, long value) {
-        sp.edit().putLong(key, value);
+    public void setWelcomeShowNum(int num) {
+        sp.edit().putInt(WELCOME_SHOW_NUM, num).commit();
     }
 }

@@ -1,5 +1,6 @@
 package com.wehealth.pdqbook.fragment;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -14,6 +15,8 @@ import android.view.animation.Animation;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 
+import com.pdq.htextview.base.HTextView;
+import com.pdq.htextview.fade.FadeTextView;
 import com.wehealth.pdqbook.R;
 import com.wehealth.pdqbook.getway.repertory.CancerDataConfigure;
 import com.wehealth.pdqbook.tool.AnimationUtil;
@@ -21,6 +24,7 @@ import com.wehealth.pdqbook.tool.FastBlur;
 import com.wehealth.pdqbook.tool.ScreenShortCutUtil;
 import com.wehealth.pdqbook.tool.Strings;
 import com.wehealth.pdqbook.view.CircleLayout;
+import com.wehealth.pdqbook.view.ShimmerFrameLayout;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,6 +37,8 @@ import com.wehealth.pdqbook.view.CircleLayout;
 public class MainFragment extends BaseFragment implements View.OnClickListener {
 
     private OnFragmentInteractionListener mListener;
+
+    private HTextView titleTx;
 
     public MainFragment() {
         // Required empty public constructor
@@ -100,6 +106,8 @@ public class MainFragment extends BaseFragment implements View.OnClickListener {
         });
 //        circleLayout.setCenterItemImage();
         circleLayout.setItemImages(images);
+        titleTx = (FadeTextView) view.findViewById(R.id.mainpage_title);
+        titleTx.animateText(getString(R.string.main_page_title));
     }
 
     // TODO: Rename method, update argument and hook method into UI event

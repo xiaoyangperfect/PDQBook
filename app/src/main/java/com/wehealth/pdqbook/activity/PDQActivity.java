@@ -18,11 +18,14 @@ import com.wehealth.pdqbook.fragment.SearchResultFragment;
 import com.wehealth.pdqbook.fragment.WelcomeFragment;
 import com.wehealth.pdqbook.getway.HttpConfigure;
 import com.wehealth.pdqbook.getway.datamodel.SearchRecord;
+import com.wehealth.pdqbook.getway.repertory.SharedPreferenceUtil;
 import com.wehealth.pdqbook.tool.Strings;
 
 import java.util.ArrayList;
 
 public class PDQActivity extends AppCompatActivity implements BaseFragment.OnFragmentInteractionListener {
+
+    private int WELCOME_PAGE_SHOW_MAX_NUM = 8;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +34,17 @@ public class PDQActivity extends AppCompatActivity implements BaseFragment.OnFra
 
 
         if (findViewById(R.id.fragment_container) != null) {
-            BaseFragment mainFragment = WelcomeFragment.newInstance();
-//            BaseFragment mainFragment = MainFragment.newInstance();
+            BaseFragment fragment;
+            SharedPreferenceUtil sharedPreferenceUtil = new SharedPreferenceUtil();
+            int num = sharedPreferenceUtil.getWelcomeShowNum();
+            if (num < WELCOME_PAGE_SHOW_MAX_NUM) {
+                sharedPreferenceUtil.setWelcomeShowNum(++num);
+                fragment = WelcomeFragment.newInstance();
+            } else {
+                fragment = MainFragment.newInstance();
+            }
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_container, mainFragment).commit();
+                    .add(R.id.fragment_container, fragment).commit();
         }
     }
 
