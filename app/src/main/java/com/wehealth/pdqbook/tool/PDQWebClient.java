@@ -33,12 +33,13 @@ public class PDQWebClient extends WebChromeClient {
         if (view == null)
             return;
         if (newProgress == 100) {
+            progressBar.setProgress(99);
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     progressBar.setVisibility(View.GONE);
                 }
-            }, 1000);
+            }, 2000);
         } else {
             progressBar.setProgress(newProgress);
         }

@@ -28,6 +28,15 @@ public class AnimationUtil {
         return animation;
     }
 
+    public static Animation initTransitionShowAnimDownToUp(float index) {
+        Animation animation = new TranslateAnimation(Animation.RELATIVE_TO_SELF,
+                0.0f, Animation.RELATIVE_TO_SELF, 0.0f,
+                Animation.RELATIVE_TO_SELF, index, Animation.RELATIVE_TO_SELF,
+                0.0f);
+        animation.setDuration(500);
+        return animation;
+    }
+
     public static Animation initScaleHideAnimation() {
         Animation animation = new ScaleAnimation(Animation.RELATIVE_TO_SELF,
                 1.0f, Animation.RELATIVE_TO_SELF, 1.0f,

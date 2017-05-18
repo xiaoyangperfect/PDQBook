@@ -1,5 +1,6 @@
 package com.wehealth.pdqbook.fragment;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -11,9 +12,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.pdq.htextview.base.HTextView;
+import com.pdq.htextview.fade.FadeTextView;
 import com.wehealth.pdqbook.R;
 import com.wehealth.pdqbook.getway.repertory.CancerDataConfigure;
 import com.wehealth.pdqbook.tool.AnimationUtil;
@@ -21,6 +27,7 @@ import com.wehealth.pdqbook.tool.FastBlur;
 import com.wehealth.pdqbook.tool.ScreenShortCutUtil;
 import com.wehealth.pdqbook.tool.Strings;
 import com.wehealth.pdqbook.view.CircleLayout;
+import com.wehealth.pdqbook.view.ShimmerFrameLayout;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,6 +40,8 @@ import com.wehealth.pdqbook.view.CircleLayout;
 public class MainFragment extends BaseFragment implements View.OnClickListener {
 
     private OnFragmentInteractionListener mListener;
+
+    private HTextView titleTx;
 
     public MainFragment() {
         // Required empty public constructor
@@ -100,6 +109,8 @@ public class MainFragment extends BaseFragment implements View.OnClickListener {
         });
 //        circleLayout.setCenterItemImage();
         circleLayout.setItemImages(images);
+        titleTx = (FadeTextView) view.findViewById(R.id.mainpage_title);
+        titleTx.animateText(getString(R.string.main_page_title));
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -179,11 +190,17 @@ public class MainFragment extends BaseFragment implements View.OnClickListener {
         } catch (Exception ex) {
 
         }
+        ImageView pdqIcon = (ImageView) view.findViewById(R.id.about_pdq_icon);
+        TextView title = (TextView) view.findViewById(R.id.pdq_about_title);
+        TextView detail = (TextView) view.findViewById(R.id.about_pdq_details);
         PopupWindow popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, false);
         popupWindow.setBackgroundDrawable(new BitmapDrawable());
         popupWindow.setOutsideTouchable(true);
         popupWindow.setFocusable(true);
         popupWindow.setAnimationStyle(R.style.popwindow_anim);
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+        pdqIcon.startAnimation(AnimationUtil.initTransitionShowAnimDownToUp(1));
+        title.startAnimation(AnimationUtil.initTransitionShowAnimDownToUp(2));
+        detail.startAnimation(AnimationUtil.initTransitionShowAnimDownToUp(1));
     }
 }
