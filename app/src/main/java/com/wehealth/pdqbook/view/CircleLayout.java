@@ -18,23 +18,23 @@ import com.wehealth.pdqbook.R;
 
 public class CircleLayout extends ViewGroup {
 
-    private static final boolean CAN_SLIDE = false;
+    private boolean CAN_SLIDE = false;
 
     private int mRadius;
     //default child item size
-    private static final float ITEM_DEFAULT_DIMENSION = 1 / 4f;
+    private float ITEM_DEFAULT_DIMENSION = 1 / 4f;
     //center child item size
-    private static final float CENTER_DIMENSION = 1 / 3f;
+    private float CENTER_DIMENSION = 1 / 3f;
     //default padding size
-    private static final float PADDING_LAYOUT = 1 / 12f;
+    private float PADDING_LAYOUT = 1 / 12f;
     /*
     *the max value finger slip.
     * if circle view move value per second is greater than 300,
      * the view is beginning to auto slip
      */
-    private static final int AUTO_FLING_VALUE = 300;
+    private int AUTO_FLING_VALUE = 300;
     //if the angle of slip is greater than this value, we will shield click event.
-    private static final int FLING_STATUS_VALUE = 3;
+    private int FLING_STATUS_VALUE = 3;
 
     private int mFlingValue = AUTO_FLING_VALUE;
 
@@ -200,13 +200,9 @@ public class CircleLayout extends ViewGroup {
                 break;
             case MotionEvent.ACTION_MOVE:
 
-                /**
-                 * 获得开始的角度
-                 */
+                //获得开始的角度
                 float start = getAngle(mLastX, mLastY);
-                /**
-                 * 获得当前的角度
-                 */
+                //获得当前的角度
                 float end = getAngle(x, y);
 
                 // Log.e("TAG", "start = " + start + " , end =" + end);

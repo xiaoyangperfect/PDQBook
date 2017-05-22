@@ -32,8 +32,7 @@ public class WelcomeFragment extends BaseFragment {
     }
 
     public static WelcomeFragment newInstance() {
-        WelcomeFragment fragment = new WelcomeFragment();
-        return fragment;
+        return new WelcomeFragment();
     }
 
     @Override

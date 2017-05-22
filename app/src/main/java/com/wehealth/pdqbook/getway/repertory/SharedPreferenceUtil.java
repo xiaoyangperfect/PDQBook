@@ -25,6 +25,6 @@ public class SharedPreferenceUtil {
     }
 
     public void setWelcomeShowNum(int num) {
-        sp.edit().putInt(WELCOME_SHOW_NUM, num).commit();
+        sp.edit().putInt(WELCOME_SHOW_NUM, num).apply();
     }
 }

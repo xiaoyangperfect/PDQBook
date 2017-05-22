@@ -5,7 +5,7 @@ package com.wehealth.pdqbook.getway.repertory.db;
  */
 
 public interface IDBColumnInfo {
-    public String columnName();
-    public DBColumnDataType dataType();
-    public DBColumnConstraint columnConstraint();
+    String columnName();
+    DBColumnDataType dataType();
+    DBColumnConstraint columnConstraint();
 }

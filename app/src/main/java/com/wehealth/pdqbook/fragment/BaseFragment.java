@@ -38,8 +38,9 @@ public class BaseFragment extends Fragment {
         settings.setJavaScriptEnabled(true);
         settings.setSupportZoom(true);
         settings.setCacheMode(WebSettings.LOAD_NO_CACHE);
-        if (javascriptInterface != null)
+        if (javascriptInterface != null && Build.VERSION.SDK_INT >= 17) {
             webView.addJavascriptInterface(javascriptInterface, "android");
+        }
         webView.setWebChromeClient(new PDQWebClient(bar));
         if (Build.VERSION.SDK_INT >=Build.VERSION_CODES.KITKAT) {
             webView.setWebContentsDebuggingEnabled(true);

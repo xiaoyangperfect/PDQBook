@@ -1,10 +1,7 @@
 package com.wehealth.pdqbook.tool;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
-
-import org.json.JSONObject;
 
 /**
  * @Author yangxiao on 3/17/2017.

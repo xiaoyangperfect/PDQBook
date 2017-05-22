@@ -1,6 +1,7 @@
-package com.pdq.htextview.base;
+package com.wehealth.pdqbook.view.htextview.base;
 
 import android.content.Context;
+import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
@@ -9,7 +10,7 @@ import android.widget.TextView;
  * Created by hanks on 2017/3/13.
  */
 
-public abstract class HTextView extends TextView {
+public abstract class HTextView extends AppCompatTextView {
     public HTextView(Context context) {
         this(context, null);
     }

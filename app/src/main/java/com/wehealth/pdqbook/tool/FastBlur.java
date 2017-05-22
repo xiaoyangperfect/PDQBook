@@ -13,9 +13,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.view.View;
 
-/**
- * Created by paveld on 3/6/14.
- */
 public class FastBlur {
 
     public static Bitmap doBlur(Bitmap sentBitmap, int radius, boolean canReuseInBitmap) {
@@ -255,6 +252,7 @@ public class FastBlur {
 
     /**
      * 高斯模糊
+     *
      * @param bkg
      * @param view
      */
@@ -263,9 +261,9 @@ public class FastBlur {
         float radius = 8;
         float scaleFactor = 8;
 
-        Bitmap overlay = Bitmap.createBitmap((int)(bkg.getWidth()/scaleFactor), (int)(bkg.getHeight()/scaleFactor), Bitmap.Config.ARGB_8888);
+        Bitmap overlay = Bitmap.createBitmap((int) (bkg.getWidth() / scaleFactor), (int) (bkg.getHeight() / scaleFactor), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(overlay);
-        canvas.translate(-view.getLeft()/scaleFactor, -view.getTop()/scaleFactor);
+        canvas.translate(-view.getLeft() / scaleFactor, -view.getTop() / scaleFactor);
         canvas.scale(1 / scaleFactor, 1 / scaleFactor);
         Paint paint = new Paint();
         paint.setFlags(Paint.FILTER_BITMAP_FLAG);

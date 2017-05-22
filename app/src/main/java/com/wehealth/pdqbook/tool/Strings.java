@@ -1,7 +1,5 @@
 package com.wehealth.pdqbook.tool;
 
-import com.wehealth.pdqbook.fragment.MainFragment;
-
 /**
  * Created by xiaoyang on 2016/12/9.
  */
@@ -25,8 +23,8 @@ public class Strings {
     }
 
     //fragment onclick listener param uri
-    private static final String INTNET_URI = "content://com.wehealth.pdqbook?%s#%s";
-    public static final String getIntentUri(String fragment, String... params) {
+    private static String INTENT_URI = "content://com.wehealth.pdqbook?%s#%s";
+    public static String getIntentUri(String fragment, String... params) {
         if (params.length % 2 != 0)
             throw new IllegalArgumentException("params must be even number");
         String paramStr = "";
@@ -44,6 +42,6 @@ public class Strings {
                 paramStr = paramStr.substring(1);
         }
 
-        return String.format(INTNET_URI, paramStr, fragment);
+        return String.format(INTENT_URI, paramStr, fragment);
     }
 }

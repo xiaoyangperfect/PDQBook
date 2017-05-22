@@ -1,4 +1,4 @@
-package com.pdq.htextview.base;
+package com.wehealth.pdqbook.view.htextview.base;
 /**
  * Created by hanks on 15-12-14.
  */

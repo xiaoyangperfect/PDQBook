@@ -72,8 +72,7 @@ public abstract class BaseDBTable {
     protected long replaceRecord(ContentValues values) {
         beginTransaction();
         try {
-            long rowId = db().replace(tableName(), null, values);
-            return rowId;
+            return db().replace(tableName(), null, values);
         } finally {
             endTransaction();
         }
@@ -94,7 +93,7 @@ public abstract class BaseDBTable {
             int updateCount = db().updateWithOnConflict(tableName(), values, NO_WhereClause, NO_SelectionArgs, SQLiteDatabase.CONFLICT_IGNORE);
             if (updateCount != 1) {
                 long rowId = db().insert(tableName(), null, values);
-                return rowId > 0 ? true : false;
+                return rowId > 0;
             } else {
                 return true;
             }

@@ -1,4 +1,4 @@
-package com.pdq.htextview.base;
+package com.wehealth.pdqbook.view.htextview.base;
 
 import android.graphics.Canvas;
 import android.util.AttributeSet;

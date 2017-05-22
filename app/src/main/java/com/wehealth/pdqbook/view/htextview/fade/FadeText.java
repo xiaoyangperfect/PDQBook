@@ -1,4 +1,4 @@
-package com.pdq.htextview.fade;
+package com.wehealth.pdqbook.view.htextview.fade;
 
 import android.animation.ValueAnimator;
 import android.content.res.TypedArray;
@@ -7,9 +7,9 @@ import android.text.Layout;
 import android.util.AttributeSet;
 import android.view.animation.LinearInterpolator;
 
-import com.pdq.htextview.R;
-import com.pdq.htextview.base.HText;
-import com.pdq.htextview.base.HTextView;
+import com.wehealth.pdqbook.R;
+import com.wehealth.pdqbook.view.htextview.base.HText;
+import com.wehealth.pdqbook.view.htextview.base.HTextView;
 
 import java.util.ArrayList;
 import java.util.List;

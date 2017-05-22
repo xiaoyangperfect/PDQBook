@@ -5,5 +5,5 @@ package com.wehealth.pdqbook.tool;
  */
 
 public interface Function<T> {
-    public void call();
+    void call();
 }

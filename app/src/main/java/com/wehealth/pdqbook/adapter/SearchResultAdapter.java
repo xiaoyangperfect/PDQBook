@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.wehealth.pdqbook.R;
 import com.wehealth.pdqbook.getway.model.SearchResultListEntry;
-import com.wehealth.pdqbook.listener.OnItemClickListener;
 import com.wehealth.pdqbook.listener.OnItemClickListenerWithViewCallBack;
 
 import java.util.ArrayList;
