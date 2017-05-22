@@ -1,7 +1,5 @@
 package com.wehealth.pdqbook.tool;
 
-import android.webkit.JavascriptInterface;
-
 /**
  * @Author yangxiao on 2/15/2017.
  */

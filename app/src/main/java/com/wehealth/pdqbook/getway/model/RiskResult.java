@@ -1,6 +1,5 @@
 package com.wehealth.pdqbook.getway.model;
 
-import com.google.gson.JsonObject;
 import com.wehealth.pdqbook.tool.GsonTool;
 
 /**
@@ -38,7 +37,6 @@ public class RiskResult {
     }
 
     public static RiskResult parser(String json) {
-        RiskResult riskResult = GsonTool.parserJson(json, RiskResult.class);
-        return riskResult;
+        return GsonTool.parserJson(json, RiskResult.class);
     }
 }

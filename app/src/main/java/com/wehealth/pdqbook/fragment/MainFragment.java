@@ -1,6 +1,5 @@
 package com.wehealth.pdqbook.fragment;
 
-import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -11,15 +10,13 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.pdq.htextview.base.HTextView;
-import com.pdq.htextview.fade.FadeTextView;
+import com.wehealth.pdqbook.view.htextview.base.HTextView;
+import com.wehealth.pdqbook.view.htextview.fade.FadeTextView;
 import com.wehealth.pdqbook.R;
 import com.wehealth.pdqbook.getway.repertory.CancerDataConfigure;
 import com.wehealth.pdqbook.tool.AnimationUtil;
@@ -27,7 +24,6 @@ import com.wehealth.pdqbook.tool.FastBlur;
 import com.wehealth.pdqbook.tool.ScreenShortCutUtil;
 import com.wehealth.pdqbook.tool.Strings;
 import com.wehealth.pdqbook.view.CircleLayout;
-import com.wehealth.pdqbook.view.ShimmerFrameLayout;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -54,8 +50,7 @@ public class MainFragment extends BaseFragment implements View.OnClickListener {
      * @return A new instance of fragment MainFragment.
      */
     public static MainFragment newInstance() {
-        MainFragment fragment = new MainFragment();
-        return fragment;
+        return new MainFragment();
     }
 
     @Override

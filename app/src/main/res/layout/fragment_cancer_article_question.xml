@@ -35,7 +35,8 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_marginBottom="@dimen/fab_margin"
-            android:layout_marginRight="@dimen/fab_margin" />
+            android:layout_marginRight="@dimen/fab_margin"
+            android:contentDescription="@string/switch_lang_description"/>
     </RelativeLayout>
 
 </LinearLayout>

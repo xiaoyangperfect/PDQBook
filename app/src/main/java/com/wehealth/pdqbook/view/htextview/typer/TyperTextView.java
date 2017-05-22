@@ -1,4 +1,4 @@
-package com.pdq.htextview.typer;
+package com.wehealth.pdqbook.view.htextview.typer;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -7,8 +7,8 @@ import android.os.Message;
 import android.util.AttributeSet;
 
 
-import com.pdq.htextview.R;
-import com.pdq.htextview.base.HTextView;
+import com.wehealth.pdqbook.R;
+import com.wehealth.pdqbook.view.htextview.base.HTextView;
 
 import java.util.Random;
 

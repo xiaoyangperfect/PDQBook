@@ -34,7 +34,7 @@ public class SearchRecordsAdapter extends RecyclerView.Adapter<SearchRecordsAdap
 
     @Override
     public SearchRecordViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_search_records, null);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_search_records, parent, false);
         return new SearchRecordViewHolder(view);
     }
 

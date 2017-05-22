@@ -13,9 +13,9 @@ import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.net.Uri;
 import android.support.v4.view.ViewCompat;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.view.animation.Animation;
-import android.widget.ImageView;
 
 import com.wehealth.pdqbook.R;
 
@@ -23,21 +23,21 @@ import com.wehealth.pdqbook.R;
  * Created by xiaoyang on 2017/1/18.
  */
 
-public class CircleProgressBar extends ImageView {
+public class CircleProgressBar extends AppCompatImageView {
 
-    private static final int KEY_SHADOW_COLOR = 0x1E000000;
-    private static final int FILL_SHADOW_COLOR = 0x3D000000;
+    private int KEY_SHADOW_COLOR = 0x1E000000;
+    private int FILL_SHADOW_COLOR = 0x3D000000;
     // PX
-    private static final float X_OFFSET = 0f;
-    private static final float Y_OFFSET = 1.75f;
-    private static final float SHADOW_RADIUS = 3.5f;
-    private static final int SHADOW_ELEVATION = 4;
+    private float X_OFFSET = 0f;
+    private float Y_OFFSET = 1.75f;
+    private float SHADOW_RADIUS = 3.5f;
+    private int SHADOW_ELEVATION = 4;
 
 
-    private static final int DEFAULT_CIRCLE_BG_LIGHT = 0xFFFAFAFA;
-    private static final int DEFAULT_CIRCLE_DIAMETER = 56;
-    private static final int STROKE_WIDTH_LARGE = 3;
-    public static final int DEFAULT_TEXT_SIZE = 9;
+    private int DEFAULT_CIRCLE_BG_LIGHT = 0xFFFAFAFA;
+    private int DEFAULT_CIRCLE_DIAMETER = 56;
+    private int STROKE_WIDTH_LARGE = 3;
+    public int DEFAULT_TEXT_SIZE = 9;
 
     private Animation.AnimationListener mListener;
     private int mShadowRadius;
@@ -292,16 +292,16 @@ public class CircleProgressBar extends ImageView {
             mProgressDrawable.setColorSchemeColors(colors);
         }
     }
-
-    /**
-     * Update the background color of the mBgCircle image view.
-     */
-    public void setBackgroundColor(int colorRes) {
-        if (getBackground() instanceof ShapeDrawable) {
-            final Resources res = getResources();
-            ((ShapeDrawable) getBackground()).getPaint().setColor(res.getColor(colorRes));
-        }
-    }
+//
+//    /**
+//     * Update the background color of the mBgCircle image view.
+//     */
+//    public void setBackgroundColor(int colorRes) {
+//        if (getBackground() instanceof ShapeDrawable) {
+//            final Resources res = getResources();
+//            ((ShapeDrawable) getBackground()).getPaint().setColor(res.getColor(colorRes));
+//        }
+//    }
 
     public boolean isShowProgressText() {
         return mIfDrawText;

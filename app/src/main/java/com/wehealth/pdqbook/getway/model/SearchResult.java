@@ -3,7 +3,6 @@ package com.wehealth.pdqbook.getway.model;
 import com.google.gson.stream.JsonReader;
 import com.wehealth.pdqbook.R;
 import com.wehealth.pdqbook.content.AppContext;
-import com.wehealth.pdqbook.content.PDQApp;
 import com.wehealth.pdqbook.getway.PDQInterface;
 import com.wehealth.pdqbook.getway.error.PDQException;
 import com.wehealth.pdqbook.tool.GsonTool;

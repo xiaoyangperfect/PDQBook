@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:layout_centerInParent="true" />
 
-    <com.pdq.htextview.fade.FadeTextView
+    <com.wehealth.pdqbook.view.htextview.fade.FadeTextView
         android:id="@+id/mainpage_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
             android:clickable="false"
             android:text="@string/main_page_search_hint_text"
             android:textColor="@color/color_text_navy"
-            android:textSize="16dp" />
+            android:textSize="16sp" />
     </RelativeLayout>
 
     <RelativeLayout

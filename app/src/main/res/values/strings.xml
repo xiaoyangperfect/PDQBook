@@ -58,4 +58,7 @@
     <string name="pdq_about">关于PDQ</string>
     <string name="pdq_about_detail">       PDQ癌症综合信息库自1977年由美国国家癌症研究所（NCI）创建，内容涵盖了癌症筛查、预防、诊断、治疗、支持与姑息治疗、补充和替代疗法、遗传学和药物等方面。该信息库定期对全世界癌症研究结果进行汇总，及时更新相关内容，为癌症预防、诊断和治疗提供最新信息。</string>
     <string name="copyright">Copyright © 2016 PDQ. All rights reserved.</string>
+
+    <!-- 文章详情 -->
+    <string name="switch_lang_description">切换语言</string>
 </resources>
