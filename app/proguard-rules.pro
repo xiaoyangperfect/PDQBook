@@ -29,3 +29,4 @@
 -keep public class * extends android.support.** #如果有引用v4或者v7包，需添加
 # -libraryjars libs/xxx.jar        #混淆第三方jar包，其中xxx为jar包名
 -keepattributes Signature        #不混淆泛型
+
